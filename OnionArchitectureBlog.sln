@@ -11,6 +11,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "B.Application", "B.Applicat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "B.Infrastructure.EfCore", "B.Infrastructure.EfCore\B.Infrastructure.EfCore.csproj", "{75671E20-2786-4DC8-9BFF-9A6A52B60824}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "B.Presentation.Blazor", "B.Presentation.Blazor\B.Presentation.Blazor.csproj", "{27087A59-43DF-459D-8209-98D5AE36CA3B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{45670875-7483-41BA-8D53-4073F591DB31}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{4E985324-7896-49A2-A968-D9BF861F2705}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,9 +39,18 @@ Global
 		{75671E20-2786-4DC8-9BFF-9A6A52B60824}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{75671E20-2786-4DC8-9BFF-9A6A52B60824}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{75671E20-2786-4DC8-9BFF-9A6A52B60824}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27087A59-43DF-459D-8209-98D5AE36CA3B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27087A59-43DF-459D-8209-98D5AE36CA3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27087A59-43DF-459D-8209-98D5AE36CA3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27087A59-43DF-459D-8209-98D5AE36CA3B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{3BF3DFC7-B52B-4134-B79A-3C9EE7E43C14} = {4E985324-7896-49A2-A968-D9BF861F2705}
+		{3E24418E-A004-4485-B00F-63FB71BCAB65} = {4E985324-7896-49A2-A968-D9BF861F2705}
+		{27087A59-43DF-459D-8209-98D5AE36CA3B} = {45670875-7483-41BA-8D53-4073F591DB31}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5CDF2EA9-9F9A-4249-B8FF-CF0808570DD1}
