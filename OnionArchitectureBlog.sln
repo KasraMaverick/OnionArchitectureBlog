@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "B.Application.Contracts", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "B.Application", "B.Application\B.Application.csproj", "{3E24418E-A004-4485-B00F-63FB71BCAB65}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "B.Infrastructure.EfCore", "B.Infrastructure.EfCore\B.Infrastructure.EfCore.csproj", "{75671E20-2786-4DC8-9BFF-9A6A52B60824}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{3E24418E-A004-4485-B00F-63FB71BCAB65}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3E24418E-A004-4485-B00F-63FB71BCAB65}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3E24418E-A004-4485-B00F-63FB71BCAB65}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75671E20-2786-4DC8-9BFF-9A6A52B60824}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75671E20-2786-4DC8-9BFF-9A6A52B60824}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75671E20-2786-4DC8-9BFF-9A6A52B60824}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75671E20-2786-4DC8-9BFF-9A6A52B60824}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

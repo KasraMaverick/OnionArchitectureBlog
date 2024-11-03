@@ -6,6 +6,7 @@
         public string Title { get; private set; }
         public bool IsDeleted { get; private set; }
         public DateTime CreatedDate { get; private set; }
+        public DateTime UpdatedDate { get; private set; }
         public ArticleCategory(string title)
         {
             Title = title;
