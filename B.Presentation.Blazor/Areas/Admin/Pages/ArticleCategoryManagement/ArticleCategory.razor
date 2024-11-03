@@ -1,4 +1,27 @@
 ﻿@page "/Admin/ArticleCategory"
 
-@using Radzen
+@using B.Application.Contracts.ArticleCategory
 @using Radzen.Blazor
+
+<RadzenDataGrid AllowFiltering="true" AllowColumnResize="true" AllowAlternatingRows="false" FilterMode="FilterMode.Advanced" AllowSorting="true" PageSize="5" AllowPaging="true" PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
+    Data="@ArticleCategoriesQueryable" ColumnWidth="300px" LogicalFilterOperator="LogicalFilterOperator.Or" SelectionMode="DataGridSelectionMode.Single" @bind-Value=@SelectedArticleCategories>
+    <Columns>
+        <RadzenDataGridColumn Property="@nameof(ArticleCategoryViewModel.Id)" Filterable="false" Title="ID" Frozen="true" Width="80px" TextAlign="TextAlign.Center" />
+        <RadzenDataGridColumn Property="@nameof(ArticleCategoryViewModel.Title)" Title="Title" Frozen="true" Width="160px" />
+        <RadzenDataGridColumn Property="@nameof(ArticleCategoryViewModel.IsDeleted)" Title="Status" Width="160px">
+            <Template Context="data">
+                @if (data.IsDeleted == true)
+                {
+                    <span>InActive</span>
+                }
+                else
+                {
+                    <span>Active</span>
+                }
+            </Template>
+            </RadzenDataGridColumn>
+        <RadzenDataGridColumn Property="@nameof(ArticleCategoryViewModel.CreatedDate)" Title="Created Date" Width="200px" />
+        <RadzenDataGridColumn Property="@nameof(ArticleCategoryViewModel.UpdatedDate)" Title="Updated Date" Width="120px" />
+    </Columns>
+</RadzenDataGrid>
+

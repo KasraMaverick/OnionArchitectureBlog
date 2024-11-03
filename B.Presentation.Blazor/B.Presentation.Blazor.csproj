@@ -6,9 +6,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Content Remove="Areas\Admin\Pages\ArticleCategoryManagement\ArticleCategory.razor" />
-  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.27" />
@@ -30,6 +28,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\B.Application.Contracts\B.Application.Contracts.csproj" />
+    <ProjectReference Include="..\B.Application\B.Application.csproj" />
+    <ProjectReference Include="..\B.Infrastructure.EfCore\B.Infrastructure.EfCore.csproj" />
   </ItemGroup>
 
 </Project>
