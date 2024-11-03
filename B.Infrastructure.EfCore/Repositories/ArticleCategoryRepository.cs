@@ -11,17 +11,20 @@ namespace B.Infrastructure.EfCore.Repositories
             _dbContext = dbContext;
         }
 
+        //-------------------- ADD ARTICLE CATEGORY --------------------\\
         public async Task AddArticleCategory(ArticleCategory articleCategory)
         {
             await _dbContext.ArticleCategories.AddAsync(articleCategory);
             await SaveChanges();
         }
 
+        //-------------------- GET ALL ARTICLE CATEGORIES --------------------\\
         public async Task<List<ArticleCategory>> GetAllArticleCategories()
         {
             return await _dbContext.ArticleCategories.ToListAsync();
         }
 
+        //------------------- SAVE CHANGES --------------------\\
         public async Task SaveChanges()
         {
             await _dbContext.SaveChangesAsync();

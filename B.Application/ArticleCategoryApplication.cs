@@ -11,6 +11,8 @@ namespace B.Application
         {
             _articleCategoryRepository = articleCategoryRepository;
         }
+
+        //----------------------------------- GET ALL ARTICLE CATEGORIES -----------------------------------\\
         public async Task<List<ArticleCategoryViewModel>> GetAllArticleCategories()
         {
             var articleCategories = await _articleCategoryRepository.GetAllArticleCategories();

@@ -1,6 +1,4 @@
-﻿using B.Domain.ArticleCategoryAgg;
-
-namespace B.Application.Contracts.ArticleCategory
+﻿namespace B.Application.Contracts.ArticleCategory
 {
     public interface IArticleCategoryApplication
     {
