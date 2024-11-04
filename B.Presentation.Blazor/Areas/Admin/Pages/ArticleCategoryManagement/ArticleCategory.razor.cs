@@ -1,4 +1,5 @@
 ﻿using B.Application.Contracts.ArticleCategory;
+using Microsoft.AspNetCore.Components;
 
 namespace B.Presentation.Blazor.Areas.Admin.Pages.ArticleCategoryManagement
 {
@@ -6,11 +7,8 @@ namespace B.Presentation.Blazor.Areas.Admin.Pages.ArticleCategoryManagement
     {
         #region INJECTIONS
 
-        private readonly IArticleCategoryApplication _articleCategoryApplication;
-        public ArticleCategory(IArticleCategoryApplication articleCategoryApplication)
-        {
-            _articleCategoryApplication = articleCategoryApplication;   
-        }
+        [Inject]
+        private IArticleCategoryApplication _articleCategoryApplication { get; set; }
 
         #endregion
 
@@ -27,7 +25,6 @@ namespace B.Presentation.Blazor.Areas.Admin.Pages.ArticleCategoryManagement
         {
             await GetAllArticleCategories();
         }
-
 
 
         public async Task GetAllArticleCategories()

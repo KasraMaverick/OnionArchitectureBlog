@@ -29,6 +29,7 @@
   <ItemGroup>
     <ProjectReference Include="..\B.Application.Contracts\B.Application.Contracts.csproj" />
     <ProjectReference Include="..\B.Application\B.Application.csproj" />
+    <ProjectReference Include="..\B.Infrastructure.Core\B.Infrastructure.Core.csproj" />
     <ProjectReference Include="..\B.Infrastructure.EfCore\B.Infrastructure.EfCore.csproj" />
   </ItemGroup>
 
