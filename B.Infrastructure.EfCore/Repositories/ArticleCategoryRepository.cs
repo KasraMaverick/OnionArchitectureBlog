@@ -1,4 +1,5 @@
-﻿using B.Domain.ArticleCategoryAgg;
+﻿using _0_Framework.Application.Model;
+using B.Domain.ArticleCategoryAgg;
 using Microsoft.EntityFrameworkCore;
 
 namespace B.Infrastructure.EfCore.Repositories
@@ -19,7 +20,7 @@ namespace B.Infrastructure.EfCore.Repositories
         }
 
         //-------------------- GET ALL ARTICLE CATEGORIES --------------------\\
-        public async Task<List<ArticleCategory>> GetAllArticleCategories()
+        public async Task<OperationResultWithData<List<ArticleCategory>>> GetAllArticleCategories()
         {
             return await _dbContext.ArticleCategories.ToListAsync();
         }

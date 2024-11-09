@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using _0_Framework.Application.Model;
+using B.Application.Contracts.ArticleCategory;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Blog.Presentation.WebAPI.Controllers
 {
@@ -6,5 +8,6 @@ namespace Blog.Presentation.WebAPI.Controllers
     [ApiController]
     public class ArticleCategoryController : ControllerBase
     {
+
     }
 }

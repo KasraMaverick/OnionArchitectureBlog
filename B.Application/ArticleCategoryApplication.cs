@@ -1,4 +1,5 @@
-﻿using B.Application.Contracts.ArticleCategory;
+﻿using _0_Framework.Application.Model;
+using B.Application.Contracts.ArticleCategory;
 using B.Domain.ArticleCategoryAgg;
 using System.Globalization;
 
@@ -20,7 +21,7 @@ namespace B.Application
         }
 
         //----------------------------------- GET ALL ARTICLE CATEGORIES -----------------------------------\\
-        public async Task<List<ArticleCategoryViewModel>> GetAllArticleCategories()
+        public async Task<OperationResultWithData<List<ArticleCategoryViewModel>>> GetAllArticleCategories()
         {
             var articleCategories = await _articleCategoryRepository.GetAllArticleCategories();
             var result = new List<ArticleCategoryViewModel>();
