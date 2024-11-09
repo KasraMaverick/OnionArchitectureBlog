@@ -1,4 +1,4 @@
-﻿namespace B.Domain.ArticleCategoryAgg
+﻿namespace Blog.Management.Domain.ArticleCategoryAgg
 {
     public class ArticleCategory
     {

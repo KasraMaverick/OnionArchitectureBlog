@@ -1,9 +1,4 @@
-using B.Application;
-using B.Application.Contracts.ArticleCategory;
-using B.Domain.ArticleCategoryAgg;
-using B.Infrastructure.Core;
-using B.Infrastructure.EfCore;
-using B.Infrastructure.EfCore.Repositories;
+using Blog.Management.Infrastructure.Core;
 
 var builder = WebApplication.CreateBuilder(args);
 

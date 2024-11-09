@@ -1,6 +1,4 @@
-﻿using _0_Framework.Application.Model;
-using B.Application.Contracts.ArticleCategory;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace Blog.Presentation.WebAPI.Controllers
 {

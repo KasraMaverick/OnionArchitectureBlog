@@ -1,8 +1,8 @@
-﻿using B.Application;
-using B.Application.Contracts.ArticleCategory;
-using B.Domain.ArticleCategoryAgg;
-using B.Infrastructure.EfCore;
-using B.Infrastructure.EfCore.Repositories;
+﻿using Blog.Management.Application;
+using Blog.Management.Application.Contracts.ArticleCategory;
+using Blog.Management.Domain.ArticleCategoryAgg;
+using Blog.Management.Infrastructure.EfCore;
+using Blog.Management.Infrastructure.EfCore.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -11,7 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace B.Infrastructure.Core
+namespace Blog.Management.Infrastructure.Core
 {
     public static class Bootstrapper
     {

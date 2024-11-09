@@ -1,8 +1,8 @@
-﻿using B.Domain.ArticleCategoryAgg;
+﻿using Blog.Management.Domain.ArticleCategoryAgg;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace B.Infrastructure.EfCore.Mappings
+namespace Blog.Management.Infrastructure.EfCore.Mappings
 {
     public class ArticleCategoryMapping : IEntityTypeConfiguration<ArticleCategory>
     {

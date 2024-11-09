@@ -1,4 +1,4 @@
-﻿using B.Application.Contracts.ArticleCategory;
+﻿using Blog.Management.Application.Contracts.ArticleCategory;
 
 namespace Blog.Provider.ArticleCategory
 {

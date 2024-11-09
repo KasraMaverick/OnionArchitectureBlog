@@ -1,6 +1,6 @@
 ﻿using _0_Framework.Application.Model;
 
-namespace B.Application.Contracts.ArticleCategory
+namespace Blog.Management.Application.Contracts.ArticleCategory
 {
     public interface IArticleCategoryApplication
     {

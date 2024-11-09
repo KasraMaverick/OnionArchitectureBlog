@@ -1,8 +1,9 @@
 ﻿using _0_Framework.Application.Model;
-using B.Domain.ArticleCategoryAgg;
+using Blog.Management.Domain.ArticleCategoryAgg;
+using Blog.Management.Infrastructure.EfCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace B.Infrastructure.EfCore.Repositories
+namespace Blog.Management.Infrastructure.EfCore.Repositories
 {
     public class ArticleCategoryRepository : IArticleCategoryRepository
     {

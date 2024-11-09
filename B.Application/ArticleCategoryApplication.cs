@@ -1,9 +1,9 @@
 ﻿using _0_Framework.Application.Model;
-using B.Application.Contracts.ArticleCategory;
-using B.Domain.ArticleCategoryAgg;
+using Blog.Management.Application.Contracts.ArticleCategory;
+using Blog.Management.Domain.ArticleCategoryAgg;
 using System.Globalization;
 
-namespace B.Application
+namespace Blog.Management.Application
 {
     public class ArticleCategoryApplication : IArticleCategoryApplication
     {
@@ -26,7 +26,7 @@ namespace B.Application
             var articleCategories = await _articleCategoryRepository.GetAllArticleCategories();
             var result = new List<ArticleCategoryViewModel>();
 
-            foreach(var articleCategory in articleCategories) 
+            foreach (var articleCategory in articleCategories)
             {
                 result.Add(new ArticleCategoryViewModel
                 {

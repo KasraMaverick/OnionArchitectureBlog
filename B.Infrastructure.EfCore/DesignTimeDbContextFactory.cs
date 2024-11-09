@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System.IO;
 
-namespace B.Infrastructure.EfCore
+namespace Blog.Management.Infrastructure.EfCore
 {
     public class BlogContextFactory : IDesignTimeDbContextFactory<BlogContext>
     {
