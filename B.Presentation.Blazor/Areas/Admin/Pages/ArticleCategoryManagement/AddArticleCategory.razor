@@ -1,0 +1,15 @@
+﻿<RadzenStack Gap="1.5rem" Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" JustifyContent="JustifyContent.SpaceBetween">
+    <RadzenStack>
+        <RadzenTextBox Name="Title" @bind-Value="CreateArticleCategoryDto.Title" />
+        <RadzenStack>
+            <div class="row">
+                <div class="col-md-4">
+                    <RadzenButton Text="Submit" Click="Add" />
+                </div>
+                <div class="col-md-4">
+                    <RadzenButton Text="Cancel" Click="HideAddDialog" />
+                </div>
+            </div>
+        </RadzenStack>
+    </RadzenStack>
+</RadzenStack>

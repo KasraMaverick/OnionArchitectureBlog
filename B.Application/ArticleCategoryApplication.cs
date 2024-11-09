@@ -12,6 +12,13 @@ namespace B.Application
             _articleCategoryRepository = articleCategoryRepository;
         }
 
+        //----------------------------------- CREATE ARTICLE CATEGORY -----------------------------------\\
+        public async Task Create(CreateArticleCategoryDto articleCategoryDto)
+        {
+            var articleCategory = new ArticleCategory(articleCategoryDto.Title);
+            await _articleCategoryRepository.AddArticleCategory(articleCategory);
+        }
+
         //----------------------------------- GET ALL ARTICLE CATEGORIES -----------------------------------\\
         public async Task<List<ArticleCategoryViewModel>> GetAllArticleCategories()
         {
@@ -22,7 +29,7 @@ namespace B.Application
             {
                 result.Add(new ArticleCategoryViewModel
                 {
-                    Id = articleCategory.Id,
+                    ArticleCategoryId = articleCategory.ArticleCategoryId,
                     Title = articleCategory.Title,
                     IsDeleted = articleCategory.IsDeleted,
                     CreatedDate = articleCategory.CreatedDate.ToString(CultureInfo.InvariantCulture),

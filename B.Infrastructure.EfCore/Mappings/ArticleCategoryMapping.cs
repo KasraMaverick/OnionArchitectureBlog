@@ -8,8 +8,8 @@ namespace B.Infrastructure.EfCore.Mappings
     {
         public void Configure(EntityTypeBuilder<ArticleCategory> builder)
         {
-            builder.ToTable("ArticleCategories");
-            builder.HasKey(x => x.Id);
+            builder.ToTable("ArticleCategory");
+            builder.HasKey(x => x.ArticleCategoryId);
             builder.Property(x => x.Title);
             builder.Property(x => x.CreatedDate);
             builder.Property(x => x.IsDeleted);

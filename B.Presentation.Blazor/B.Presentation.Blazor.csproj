@@ -27,10 +27,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\B.Application.Contracts\B.Application.Contracts.csproj" />
-    <ProjectReference Include="..\B.Application\B.Application.csproj" />
-    <ProjectReference Include="..\B.Infrastructure.Core\B.Infrastructure.Core.csproj" />
-    <ProjectReference Include="..\B.Infrastructure.EfCore\B.Infrastructure.EfCore.csproj" />
+    <ProjectReference Include="..\B.Application.Contracts\Blog.Management.Application.Contracts.csproj" />
+    <ProjectReference Include="..\B.Application\Blog.Management.Application.csproj" />
+    <ProjectReference Include="..\B.Infrastructure.Core\Blog.Management.Infrastructure.Core.csproj" />
+    <ProjectReference Include="..\B.Infrastructure.EfCore\Blog.Management.Infrastructure.EfCore.csproj" />
   </ItemGroup>
 
 </Project>

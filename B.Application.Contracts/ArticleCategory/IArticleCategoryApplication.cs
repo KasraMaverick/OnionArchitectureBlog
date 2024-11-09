@@ -3,5 +3,6 @@
     public interface IArticleCategoryApplication
     {
         public Task<List<ArticleCategoryViewModel>> GetAllArticleCategories();
+        public Task Create(CreateArticleCategoryDto articleCategoryDto);
     }
 }
