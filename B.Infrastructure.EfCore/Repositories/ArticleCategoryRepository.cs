@@ -31,6 +31,30 @@ namespace Blog.Management.Infrastructure.EfCore.Repositories
             }
         }
 
+        //-------------------- UPDATE ARTICLE CATEGORY --------------------\\
+        public async Task<OperationResult> UpdateArticleCategory(ArticleCategory articleCategory)
+        {
+            var operation = new OperationResult();
+            try
+            {
+                var res = await _dbContext.ArticleCategories.Where(x => x.ArticleCategoryId == articleCategory.ArticleCategoryId).FirstOrDefaultAsync();
+                
+                
+                _dbContext.Attach(res);
+
+                _dbContext.Entry(res).Property(x => x.Title).IsModified = true;
+
+                await SaveChanges();
+
+                return operation.Succeeded(res);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         //-------------------- GET ALL ARTICLE CATEGORIES --------------------\\
         public async Task<OperationResultWithData<List<ArticleCategory>>> GetAllArticleCategories()
         {
@@ -46,6 +70,8 @@ namespace Blog.Management.Infrastructure.EfCore.Repositories
                 throw;
             }
         }
+
+
         
 
         //------------------- SAVE CHANGES --------------------\\
