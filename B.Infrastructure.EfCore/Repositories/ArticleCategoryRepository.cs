@@ -14,17 +14,39 @@ namespace Blog.Management.Infrastructure.EfCore.Repositories
         }
 
         //-------------------- ADD ARTICLE CATEGORY --------------------\\
-        public async Task AddArticleCategory(ArticleCategory articleCategory)
+        public async Task<OperationResult> AddArticleCategory(ArticleCategory articleCategory)
         {
-            await _dbContext.ArticleCategories.AddAsync(articleCategory);
-            await SaveChanges();
+            var operation = new OperationResult();
+            try
+            {
+                var res = await _dbContext.ArticleCategories.AddAsync(articleCategory);
+                await SaveChanges();
+
+                return operation.Succeeded(res);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         //-------------------- GET ALL ARTICLE CATEGORIES --------------------\\
         public async Task<OperationResultWithData<List<ArticleCategory>>> GetAllArticleCategories()
         {
-            return await _dbContext.ArticleCategories.ToListAsync();
+            var operation = new OperationResultWithData<List<ArticleCategory>>();
+            try
+            {
+                var res = await _dbContext.ArticleCategories.ToListAsync();
+                return operation.Succeeded(res);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
+        
 
         //------------------- SAVE CHANGES --------------------\\
         public async Task SaveChanges()

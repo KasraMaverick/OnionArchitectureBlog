@@ -6,6 +6,6 @@ namespace Blog.Management.Domain.ArticleCategoryAgg
     {
         //Task<List<ArticleCategory>> SearchArticleCategories(ArticleCategory dto);
         Task<OperationResultWithData<List<ArticleCategory>>> GetAllArticleCategories();
-        Task AddArticleCategory(ArticleCategory articleCategory);
+        Task<OperationResult> AddArticleCategory(ArticleCategory articleCategory);
     }
 }

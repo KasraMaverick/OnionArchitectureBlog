@@ -5,6 +5,6 @@ namespace Blog.Management.Application.Contracts.ArticleCategory
     public interface IArticleCategoryApplication
     {
         public Task<OperationResultWithData<List<ArticleCategoryViewModel>>> GetAllArticleCategories();
-        public Task Create(CreateArticleCategoryDto articleCategoryDto);
+        public Task<OperationResult> Create(CreateArticleCategoryDto articleCategoryDto);
     }
 }

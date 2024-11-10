@@ -2,6 +2,7 @@
 using Blog.Management.Application.Contracts.ArticleCategory;
 using Blog.Management.Domain.ArticleCategoryAgg;
 using System.Globalization;
+using System.Net;
 
 namespace Blog.Management.Application
 {
@@ -14,29 +15,68 @@ namespace Blog.Management.Application
         }
 
         //----------------------------------- CREATE ARTICLE CATEGORY -----------------------------------\\
-        public async Task Create(CreateArticleCategoryDto articleCategoryDto)
+        public async Task<OperationResult> Create(CreateArticleCategoryDto articleCategoryDto)
         {
-            var articleCategory = new ArticleCategory(articleCategoryDto.Title);
-            await _articleCategoryRepository.AddArticleCategory(articleCategory);
+            var operation = new OperationResult();
+            
+
+            try
+            {
+                var articleCategory = new ArticleCategory(articleCategoryDto.Title);
+                var res = await _articleCategoryRepository.AddArticleCategory(articleCategory);
+
+                return operation.Succeeded(res);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+            
         }
 
         //----------------------------------- GET ALL ARTICLE CATEGORIES -----------------------------------\\
         public async Task<OperationResultWithData<List<ArticleCategoryViewModel>>> GetAllArticleCategories()
         {
-            var articleCategories = await _articleCategoryRepository.GetAllArticleCategories();
-            var result = new List<ArticleCategoryViewModel>();
+            var operation = new OperationResultWithData<List<ArticleCategoryViewModel>>();
 
-            foreach (var articleCategory in articleCategories)
+            try
             {
-                result.Add(new ArticleCategoryViewModel
+                var res = await _articleCategoryRepository.GetAllArticleCategories();
+                if (!res.IsSucceeded)
                 {
-                    ArticleCategoryId = articleCategory.ArticleCategoryId,
-                    Title = articleCategory.Title,
-                    IsDeleted = articleCategory.IsDeleted,
-                    CreatedDate = articleCategory.CreatedDate.ToString(CultureInfo.InvariantCulture),
-                    UpdatedDate = articleCategory.UpdatedDate.ToString(CultureInfo.InvariantCulture)
-                });
+                    return operation.Failed(res.Message);
+                }
+                if (res == null)
+                {
+                    return operation.Failed();
+                }
+
+                var result = new List<ArticleCategoryViewModel>();
+
+                foreach (var articleCategory in res.Result)
+                {
+                    result.Add(new ArticleCategoryViewModel
+                    {
+                        ArticleCategoryId = articleCategory.ArticleCategoryId,
+                        Title = articleCategory.Title,
+                        IsDeleted = articleCategory.IsDeleted,
+                        CreatedDate = articleCategory.CreatedDate.ToString(CultureInfo.InvariantCulture),
+                        UpdatedDate = articleCategory.UpdatedDate.ToString(CultureInfo.InvariantCulture)
+                    });
+                }
+                return operation.Succeeded(result);
             }
+            catch (Exception ex)
+            {
+
+                var errorCode = ex.Error<ArticleCategoryApplication>();
+                return operation.Failed(HttpStatusCode.InternalServerError, errorCode);
+            }
+
+            var articleCategories = await _articleCategoryRepository.GetAllArticleCategories();
+           
 
             return result;
         }

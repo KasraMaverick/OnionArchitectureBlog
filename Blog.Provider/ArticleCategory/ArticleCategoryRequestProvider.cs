@@ -1,4 +1,5 @@
-﻿using Blog.Management.Application.Contracts.ArticleCategory;
+﻿using _0_Framework.Application.Model;
+using Blog.Management.Application.Contracts.ArticleCategory;
 
 namespace Blog.Provider.ArticleCategory
 {
@@ -8,6 +9,17 @@ namespace Blog.Provider.ArticleCategory
         public ArticleCategoryRequestProvider(IArticleCategoryApplication articleCategoryApplication)
         {
             _articleCategoryApplication = articleCategoryApplication;
+        }
+
+        public async Task<OperationResultWithData<List<ArticleCategoryViewModel>>> GetAllArticleCategories()
+        {
+            return await _articleCategoryApplication.GetAllArticleCategories();
+        }
+
+        public async Task<OperationResult> CreateArticleCategory(CreateArticleCategoryDto dto)
+        {
+           return await _articleCategoryApplication.Create(dto);
+           
         }
     }
 }
