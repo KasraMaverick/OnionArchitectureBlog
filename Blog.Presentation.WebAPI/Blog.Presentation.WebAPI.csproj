@@ -18,6 +18,8 @@
     <ProjectReference Include="..\B.Domain\Blog.Management.Domain.csproj" />
     <ProjectReference Include="..\B.Infrastructure.Core\Blog.Management.Infrastructure.Core.csproj" />
     <ProjectReference Include="..\B.Infrastructure.EfCore\Blog.Management.Infrastructure.EfCore.csproj" />
+    <ProjectReference Include="..\Blog.Provider.Contracts\Blog.Provider.Contracts.csproj" />
+    <ProjectReference Include="..\Blog.Provider\Blog.Provider.csproj" />
   </ItemGroup>
 
 </Project>

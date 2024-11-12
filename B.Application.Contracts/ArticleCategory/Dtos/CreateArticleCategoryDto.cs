@@ -1,4 +1,4 @@
-﻿namespace Blog.Management.Application.Contracts.ArticleCategory
+﻿namespace Blog.Management.Application.Contracts.ArticleCategory.Dtos
 {
     public class CreateArticleCategoryDto
     {

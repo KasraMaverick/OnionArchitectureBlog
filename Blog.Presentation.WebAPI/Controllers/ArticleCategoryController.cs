@@ -1,4 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using _0_Framework.Application.Model;
+using Blog.Management.Application.Contracts.ArticleCategory;
+using Blog.Management.Application.Contracts.ArticleCategory.Dtos;
+using Blog.Provider.ArticleCategory;
+using Blog.Provider.Contracts.ArticleCategory;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Blog.Presentation.WebAPI.Controllers
 {
@@ -6,6 +11,38 @@ namespace Blog.Presentation.WebAPI.Controllers
     [ApiController]
     public class ArticleCategoryController : ControllerBase
     {
+        private readonly IArticleCategoryRequestProvider _articleCategoryProvider;
+        public ArticleCategoryController(IArticleCategoryRequestProvider articleCategoryProvider)
+        {
+            _articleCategoryProvider = articleCategoryProvider;
+        }
 
+        [HttpGet("ArticleCategoryList")]
+        public async Task<OperationResultWithData<List<GetArticleCategoryDto>>> GetAll()
+        {
+            var list = await _articleCategoryProvider.GetAll();
+            return list;
+        }
+
+        [HttpPost("Create")]
+        public async Task<OperationResult> Create(CreateArticleCategoryDto dto)
+        {
+            var res = await _articleCategoryProvider.Create(dto);
+            return res;
+        }
+
+        [HttpDelete("Edit")]
+        public async Task<OperationResult> Delete(DeleteArticleCategoryDto dto)
+        {
+            var res = await _articleCategoryProvider.Delete(dto);
+            return res;
+        }
+
+        [HttpPut("Delete")]
+        public async Task<OperationResult> Edit(UpdateArticleCategoryDto command)
+        {
+            var res = await _articleCategoryProvider.Update(command);
+            return res;
+        }
     }
 }

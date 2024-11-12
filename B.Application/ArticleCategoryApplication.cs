@@ -1,5 +1,6 @@
 ﻿using _0_Framework.Application.Model;
 using Blog.Management.Application.Contracts.ArticleCategory;
+using Blog.Management.Application.Contracts.ArticleCategory.Dtos;
 using Blog.Management.Domain.ArticleCategoryAgg;
 using System.Globalization;
 using System.Net;
@@ -14,50 +15,43 @@ namespace Blog.Management.Application
             _articleCategoryRepository = articleCategoryRepository;
         }
 
-        //----------------------------------- CREATE ARTICLE CATEGORY -----------------------------------\\
+        //----------------------------------- CREATE -----------------------------------\\
         public async Task<OperationResult> Create(CreateArticleCategoryDto articleCategoryDto)
         {
             var operation = new OperationResult();
             
-
             try
             {
                 var articleCategory = new ArticleCategory(articleCategoryDto.Title);
-                var res = await _articleCategoryRepository.AddArticleCategory(articleCategory);
+                var res = await _articleCategoryRepository.Create(articleCategory);
 
                 return operation.Succeeded(res);
             }
             catch (Exception)
             {
-
                 throw;
-            }
-
-            
+            } 
         }
 
-        //----------------------------------- GET ALL ARTICLE CATEGORIES -----------------------------------\\
-        public async Task<OperationResultWithData<List<ArticleCategoryViewModel>>> GetAllArticleCategories()
+        //----------------------------------- GET ALL -----------------------------------\\
+        public async Task<OperationResultWithData<List<GetArticleCategoryDto>>> GetAll()
         {
-            var operation = new OperationResultWithData<List<ArticleCategoryViewModel>>();
+            var operation = new OperationResultWithData<List<GetArticleCategoryDto>>();
 
             try
             {
-                var res = await _articleCategoryRepository.GetAllArticleCategories();
-                if (!res.IsSucceeded)
-                {
-                    return operation.Failed(res.Message);
-                }
+                var res = await _articleCategoryRepository.Get();
+
                 if (res == null)
                 {
                     return operation.Failed();
                 }
 
-                var result = new List<ArticleCategoryViewModel>();
+                var result = new List<GetArticleCategoryDto>();
 
-                foreach (var articleCategory in res.Result)
+                foreach (var articleCategory in res)
                 {
-                    result.Add(new ArticleCategoryViewModel
+                    result.Add(new GetArticleCategoryDto
                     {
                         ArticleCategoryId = articleCategory.ArticleCategoryId,
                         Title = articleCategory.Title,
@@ -70,15 +64,56 @@ namespace Blog.Management.Application
             }
             catch (Exception ex)
             {
-
-                var errorCode = ex.Error<ArticleCategoryApplication>();
-                return operation.Failed(HttpStatusCode.InternalServerError, errorCode);
+                return operation.Failed();
             }
-
-            var articleCategories = await _articleCategoryRepository.GetAllArticleCategories();
-           
-
-            return result;
         }
+
+        //----------------------------------- UPDATE -----------------------------------\\
+        public async Task<OperationResult> Update(UpdateArticleCategoryDto articleCategoryDto)
+        {
+            var operation = new OperationResult();
+
+            try
+            {
+                var articleCategory = new ArticleCategory(articleCategoryDto.Title);
+                var res = await _articleCategoryRepository.Edit(articleCategory, articleCategoryDto.Id);
+
+                if (res == null)
+                {
+                    return operation.Failed();
+                }
+
+                return operation.Succeeded(res);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        //----------------------------------- DELETE -----------------------------------\\
+        public async Task<OperationResult> Delete(DeleteArticleCategoryDto articleCategoryDto)
+        {
+            var operation = new OperationResult();
+
+            try
+            {
+                
+                var res = await _articleCategoryRepository.Delete(articleCategoryDto.Id);
+
+                if (!res)
+                {
+                    return operation.Failed();
+                }
+
+                return operation.Succeeded(res);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+
     }
 }

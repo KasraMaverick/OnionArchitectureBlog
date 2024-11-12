@@ -1,5 +1,6 @@
 ﻿using B.Infrastructure.EfCore.Mappings;
 using Blog.Management.Domain.ArticleCategoryAgg;
+using Blog.Management.Infrastructure.EfCore.Mappings;
 using Microsoft.EntityFrameworkCore;
 
 namespace Blog.Management.Infrastructure.EfCore

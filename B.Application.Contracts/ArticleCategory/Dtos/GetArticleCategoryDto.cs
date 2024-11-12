@@ -1,6 +1,6 @@
-﻿namespace Blog.Management.Application.Contracts.ArticleCategory
+﻿namespace Blog.Management.Application.Contracts.ArticleCategory.Dtos
 {
-    public class ArticleCategoryViewModel
+    public class GetArticleCategoryDto
     {
         public long ArticleCategoryId { get; set; }
         public string Title { get; set; }
