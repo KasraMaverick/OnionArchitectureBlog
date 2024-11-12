@@ -6,6 +6,7 @@ namespace Blog.Provider.ArticleCategory
 {
     public class ArticleCategoryRequestProvider
     {
+
         private readonly IArticleCategoryApplication _articleCategoryApplication;
         public ArticleCategoryRequestProvider(IArticleCategoryApplication articleCategoryApplication)
         {
