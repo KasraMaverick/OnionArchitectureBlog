@@ -1,4 +1,5 @@
 ﻿using Blog.Management.Application.Contracts.ArticleCategory;
+using Blog.Management.Application.Contracts.ArticleCategory.Dtos;
 using Microsoft.AspNetCore.Components;
 using Radzen;
 using Radzen.Blazor;
@@ -25,8 +26,8 @@ namespace B.Presentation.Blazor.Areas.Admin.Pages.ArticleCategoryManagement
 
         #region PROPERTIES 
 
-        public IQueryable<ArticleCategoryViewModel> ArticleCategoriesQueryable { get; set; }
-        public IList<ArticleCategoryViewModel> SelectedArticleCategories { get; set; }
+        public IQueryable<GetArticleCategoryDto> ArticleCategoriesQueryable { get; set; }
+        public IList<GetArticleCategoryDto> SelectedArticleCategories { get; set; }
         private bool showAddDialog;
 
         #endregion
@@ -40,9 +41,9 @@ namespace B.Presentation.Blazor.Areas.Admin.Pages.ArticleCategoryManagement
 
         public async Task GetAllArticleCategories()
         {
-            var result = await _articleCategoryApplication.GetAllArticleCategories();
-            ArticleCategoriesQueryable = result.AsQueryable();
-            SelectedArticleCategories = new List<ArticleCategoryViewModel> { ArticleCategoriesQueryable.FirstOrDefault() };
+            //var result = await _articleCategoryApplication.GetAllArticleCategories();
+            //ArticleCategoriesQueryable = result.AsQueryable();
+            //SelectedArticleCategories = new List<ArticleCategoryViewModel> { ArticleCategoriesQueryable.FirstOrDefault() };
         }
 
         public async void ShowAddDialog()
