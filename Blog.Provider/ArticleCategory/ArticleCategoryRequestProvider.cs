@@ -1,10 +1,11 @@
 ﻿using _0_Framework.Application.Model;
 using Blog.Management.Application.Contracts.ArticleCategory;
 using Blog.Management.Application.Contracts.ArticleCategory.Dtos;
+using Blog.Provider.Contracts.ArticleCategory;
 
 namespace Blog.Provider.ArticleCategory
 {
-    public class ArticleCategoryRequestProvider
+    public class ArticleCategoryRequestProvider : IArticleCategoryRequestProvider
     {
 
         private readonly IArticleCategoryApplication _articleCategoryApplication;
