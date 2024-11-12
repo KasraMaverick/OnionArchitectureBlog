@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\B.Application.Contracts\Blog.Management.Application.Contracts.csproj" />
+    <ProjectReference Include="..\Blog.Provider.Contracts\Blog.Provider.Contracts.csproj" />
   </ItemGroup>
 
 </Project>

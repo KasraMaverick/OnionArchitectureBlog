@@ -9,6 +9,9 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+Bootstrapper.Config(builder.Services, builder.Configuration.GetConnectionString("BlogDb"));
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -19,7 +22,6 @@ if (app.Environment.IsDevelopment())
 }
 
 
-Bootstrapper.Config(builder.Services, builder.Configuration.GetConnectionString("BlogDb"));
 
 app.UseHttpsRedirection();
 
