@@ -16,7 +16,6 @@ namespace Blog.Presentation.BlazorWebAssembly.Services.Shared
         }
 
 
-
         public async Task<List<T>>? GetAll(T request, string path)
         {
             var dataJson = request != null ? 
@@ -42,7 +41,7 @@ namespace Blog.Presentation.BlazorWebAssembly.Services.Shared
             {
                 var dataJson = new StringContent(JsonSerializer.Serialize(entity), Encoding.UTF8, _mediaType);
 
-                var response = await _httpClient.PostAsync($"{_endpoint}/{path}", dataJson);
+                var response = await _httpClient.PostAsync($"{_endpoint}/{path}/Create", dataJson);
 
                 if (!response.IsSuccessStatusCode)
                 {
@@ -81,7 +80,7 @@ namespace Blog.Presentation.BlazorWebAssembly.Services.Shared
             {
                 var dataJson = new StringContent(JsonSerializer.Serialize(entity), Encoding.UTF8, _mediaType);
 
-                var response = await _httpClient.PutAsync($"{_endpoint}/{path}", dataJson);
+                var response = await _httpClient.PutAsync($"{_endpoint}/{path}/Update", dataJson);
 
                 if (!response.IsSuccessStatusCode)
                 {
@@ -119,7 +118,7 @@ namespace Blog.Presentation.BlazorWebAssembly.Services.Shared
         {
             try
             {
-                var response = await _httpClient.DeleteAsync($"{_endpoint}/{path}/{entityId}");
+                var response = await _httpClient.DeleteAsync($"{_endpoint}/{path}/Delete");
                 if (response.IsSuccessStatusCode)
                     return true;
                 else

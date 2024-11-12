@@ -17,7 +17,7 @@ namespace Blog.Presentation.WebAPI.Controllers
             _articleCategoryProvider = articleCategoryProvider;
         }
 
-        [HttpGet("ArticleCategoryList")]
+        [HttpGet("GetAll")]
         public async Task<OperationResultWithData<List<GetArticleCategoryDto>>> GetAll()
         {
             var list = await _articleCategoryProvider.GetAll();
@@ -31,14 +31,14 @@ namespace Blog.Presentation.WebAPI.Controllers
             return res;
         }
 
-        [HttpDelete("Edit")]
+        [HttpDelete("Delete")]
         public async Task<OperationResult> Delete(DeleteArticleCategoryDto dto)
         {
             var res = await _articleCategoryProvider.Delete(dto);
             return res;
         }
 
-        [HttpPut("Delete")]
+        [HttpPut("Update")]
         public async Task<OperationResult> Edit(UpdateArticleCategoryDto command)
         {
             var res = await _articleCategoryProvider.Update(command);
