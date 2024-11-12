@@ -10,12 +10,12 @@ namespace Blog.Presentation.BlazorWebAssembly.Services
         public ArticleCategoryService(HttpClient httpClient)
         {
             _httpClient = httpClient;
-            _httpClient.BaseAddress = new Uri("");
+            _httpClient.BaseAddress = new Uri("https://localhost:7170/api/");
         }
 
         public async Task<List<GetArticleCategoryDto>> GetAllArticleCategories()
         {
-            var response = await _httpClient.GetAsync("");
+            var response = await _httpClient.GetAsync("articlecategory/articlecategorylist");
             response.EnsureSuccessStatusCode();
 
             var content = await response.Content.ReadAsStringAsync();
