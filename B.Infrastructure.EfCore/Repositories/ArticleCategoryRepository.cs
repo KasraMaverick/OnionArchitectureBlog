@@ -1,8 +1,5 @@
-﻿using _0_Framework.Application.Model;
-using Blog.Management.Domain.ArticleCategoryAgg;
-using Blog.Management.Infrastructure.EfCore;
+﻿using Blog.Management.Domain.ArticleCategoryAgg;
 using Blog.Management.Infrastructure.EfCore.Repositories.Shared;
-using Microsoft.EntityFrameworkCore;
 
 namespace Blog.Management.Infrastructure.EfCore.Repositories
 {

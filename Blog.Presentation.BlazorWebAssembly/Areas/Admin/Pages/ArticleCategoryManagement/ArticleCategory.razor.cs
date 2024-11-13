@@ -3,6 +3,7 @@ using Radzen;
 using Radzen.Blazor;
 using Radzen.Blazor.Rendering;
 using Blog.Shared.Dtos.ArticleCategory;
+using Blog.Presentation.BlazorWebAssembly.Services.Shared;
 
 namespace Blog.Presentation.BlazorWebAssembly.Areas.Admin.Pages.ArticleCategoryManagement
 {
@@ -11,6 +12,8 @@ namespace Blog.Presentation.BlazorWebAssembly.Areas.Admin.Pages.ArticleCategoryM
 
         #region INJECTIONS
 
+        [Inject]
+        public IApiService<ArticleCategory> apiService { get; set; }
 
         [Inject]
         public NotificationService notificationService { get; set; }
@@ -25,6 +28,7 @@ namespace Blog.Presentation.BlazorWebAssembly.Areas.Admin.Pages.ArticleCategoryM
 
         public IQueryable<GetArticleCategoryDto> ArticleCategoriesQueryable { get; set; }
         public IList<GetArticleCategoryDto> SelectedArticleCategories { get; set; }
+
         private bool showAddDialog;
 
         #endregion
@@ -38,7 +42,7 @@ namespace Blog.Presentation.BlazorWebAssembly.Areas.Admin.Pages.ArticleCategoryM
 
         public async Task GetAllArticleCategories()
         {
-            //var result = await _articleCategoryApplication.GetAllArticleCategories();
+            //var result = await apiService.GetAll();
             //ArticleCategoriesQueryable = result.AsQueryable();
             //SelectedArticleCategories = new List<ArticleCategoryViewModel> { ArticleCategoriesQueryable.FirstOrDefault() };
         }
