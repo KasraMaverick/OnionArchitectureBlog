@@ -1,19 +1,16 @@
-﻿using Blog.Management.Application.Contracts.ArticleCategory;
-using Blog.Management.Application.Contracts.ArticleCategory.Dtos;
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
 using Radzen;
 using Radzen.Blazor;
 using Radzen.Blazor.Rendering;
+using Blog.Shared.Dtos.ArticleCategory;
 
-namespace B.Presentation.Blazor.Areas.Admin.Pages.ArticleCategoryManagement
+namespace Blog.Presentation.BlazorWebAssembly.Areas.Admin.Pages.ArticleCategoryManagement
 {
     public partial class ArticleCategory
     {
 
         #region INJECTIONS
 
-        [Inject]
-        private IArticleCategoryApplication _articleCategoryApplication { get; set; }
 
         [Inject]
         public NotificationService notificationService { get; set; }
