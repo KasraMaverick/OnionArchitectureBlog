@@ -1,11 +1,11 @@
-﻿using Blog.Management.Application.Contracts.ArticleCategory;
-using Blog.Management.Application.Contracts.ArticleCategory.Dtos;
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
 using Radzen;
 using Radzen.Blazor;
 using Radzen.Blazor.Rendering;
+using Blog.Shared.Dtos.ArticleCategory;
+using Blog.Presentation.BlazorWebAssembly.Services.Shared;
 
-namespace B.Presentation.Blazor.Areas.Admin.Pages.ArticleCategoryManagement
+namespace Blog.Presentation.BlazorWebAssembly.Areas.Admin.Pages.ArticleCategoryManagement
 {
     public partial class ArticleCategory
     {
@@ -13,7 +13,7 @@ namespace B.Presentation.Blazor.Areas.Admin.Pages.ArticleCategoryManagement
         #region INJECTIONS
 
         [Inject]
-        private IArticleCategoryApplication _articleCategoryApplication { get; set; }
+        public IApiService<ArticleCategory> apiService { get; set; }
 
         [Inject]
         public NotificationService notificationService { get; set; }
@@ -28,6 +28,7 @@ namespace B.Presentation.Blazor.Areas.Admin.Pages.ArticleCategoryManagement
 
         public IQueryable<GetArticleCategoryDto> ArticleCategoriesQueryable { get; set; }
         public IList<GetArticleCategoryDto> SelectedArticleCategories { get; set; }
+
         private bool showAddDialog;
 
         #endregion
@@ -41,7 +42,7 @@ namespace B.Presentation.Blazor.Areas.Admin.Pages.ArticleCategoryManagement
 
         public async Task GetAllArticleCategories()
         {
-            //var result = await _articleCategoryApplication.GetAllArticleCategories();
+            //var result = await apiService.GetAll();
             //ArticleCategoriesQueryable = result.AsQueryable();
             //SelectedArticleCategories = new List<ArticleCategoryViewModel> { ArticleCategoriesQueryable.FirstOrDefault() };
         }

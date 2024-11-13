@@ -1,6 +1,9 @@
-﻿<RadzenStack Gap="1.5rem" Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" JustifyContent="JustifyContent.SpaceBetween">
+﻿@using Radzen
+@using Radzen.Blazor
+
+<RadzenStack Gap="1.5rem" Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" JustifyContent="JustifyContent.SpaceBetween">
     <RadzenStack>
-        <RadzenTextBox Name="Title" @bind-Value="CreateArticleCategoryDto.Title" />
+        <RadzenTextBox Name="Title" @bind-Value="AddArticleCategoryDto.Title" />
         <RadzenStack>
             <div class="row">
                 <div class="col-md-4">

@@ -1,7 +1,4 @@
-﻿using Blog.Management.Application.Contracts.ArticleCategory.Dtos;
-using System.Text.Json;
-
-namespace Blog.Presentation.BlazorWebAssembly.Services
+﻿namespace Blog.Presentation.BlazorWebAssembly.Services
 {
     public class ArticleCategoryService
     {

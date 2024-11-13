@@ -15,18 +15,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <UpToDateCheckInput Remove="Areas\Admin\Pages\ArticleCategoryManagement\ArticleCategory.razor" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <_ContentIncludedByDefault Remove="Areas\Admin\Pages\ArticleCategoryManagement\ArticleCategory.razor" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="Areas\Admin\Pages\ArticleCategoryManagement\ArticleCategory.razor" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\B.Application.Contracts\Blog.Management.Application.Contracts.csproj" />
     <ProjectReference Include="..\B.Application\Blog.Management.Application.csproj" />
     <ProjectReference Include="..\B.Infrastructure.Core\Blog.Management.Infrastructure.Core.csproj" />
