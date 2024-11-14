@@ -25,6 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Areas\Admin\Pages\ArticleManagement\" />
     <Folder Include="Services\Interfaces\" />
   </ItemGroup>
 
