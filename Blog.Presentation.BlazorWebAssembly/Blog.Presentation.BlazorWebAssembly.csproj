@@ -7,6 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Services\Interfaces\**" />
+    <Content Remove="Services\Interfaces\**" />
+    <EmbeddedResource Remove="Services\Interfaces\**" />
+    <None Remove="Services\Interfaces\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Remove="Areas\Admin\Pages\ArticleCategoryManagement\ArticleCategory.razor" />
   </ItemGroup>
 
@@ -26,7 +33,7 @@
 
   <ItemGroup>
     <Folder Include="Areas\Admin\Pages\ArticleManagement\" />
-    <Folder Include="Services\Interfaces\" />
+    <Folder Include="Areas\Admin\Pages\Comment\" />
   </ItemGroup>
 
 
