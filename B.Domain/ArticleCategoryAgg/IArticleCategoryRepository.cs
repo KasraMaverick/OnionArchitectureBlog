@@ -1,5 +1,4 @@
-﻿using _0_Framework.Application.Model;
-using Blog.Management.Domain.Shared;
+﻿using Blog.Management.Domain.Shared;
 
 namespace Blog.Management.Domain.ArticleCategoryAgg
 {
