@@ -9,10 +9,7 @@ namespace Blog.Management.Infrastructure.EfCore.Mappings
     {
         public void Configure(EntityTypeBuilder<Article> builder)
         {
-            builder.ToTable("Article");
-            builder.HasKey(x => x.ArticleId);
-            builder.Property(x => x.Title);
-            builder.Property(x => x.Author);
+            
         }
     }
 }

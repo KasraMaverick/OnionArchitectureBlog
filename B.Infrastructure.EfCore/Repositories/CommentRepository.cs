@@ -1,12 +1,12 @@
-﻿using Blog.Management.Domain.ArticleAgg;
+﻿using Blog.Management.Domain.CommentAgg;
 using Blog.Management.Infrastructure.EfCore.Repositories.Shared;
 
 namespace Blog.Management.Infrastructure.EfCore.Repositories
 {
-    public class ArticleRepository : Repository<Article>, IArticleRepository
+    public class CommentRepository : Repository<Comment>, ICommentRepository
     {
         private readonly BlogContext _dbContext;
-        public ArticleRepository(BlogContext dbContext) : base(dbContext)
+        public CommentRepository(BlogContext dbContext) : base(dbContext)
         {
             _dbContext = dbContext;
         }
