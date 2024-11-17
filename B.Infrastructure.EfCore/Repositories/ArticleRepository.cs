@@ -3,7 +3,7 @@ using Blog.Management.Infrastructure.EfCore.Repositories.Shared;
 
 namespace Blog.Management.Infrastructure.EfCore.Repositories
 {
-    public class ArticleRepository : Repository<Article>
+    public class ArticleRepository : Repository<Article>, IArticleRepository
     {
         private readonly BlogContext _dbContext;
         public ArticleRepository(BlogContext dbContext) : base(dbContext)
