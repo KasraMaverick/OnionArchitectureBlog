@@ -34,9 +34,9 @@ namespace Blog.Management.Application
         }
 
         //----------------------------------- GET ALL -----------------------------------\\
-        public async Task<OperationResultWithData<List<GetAuthorDto>>> GetAll()
+        public async Task<OperationResultWithData<List<GetArticleCategoryDto>>> GetAll()
         {
-            var operation = new OperationResultWithData<List<GetAuthorDto>>();
+            var operation = new OperationResultWithData<List<GetArticleCategoryDto>>();
 
             try
             {
@@ -47,11 +47,11 @@ namespace Blog.Management.Application
                     return operation.Failed();
                 }
 
-                var result = new List<GetAuthorDto>();
+                var result = new List<GetArticleCategoryDto>();
 
                 foreach (var articleCategory in res)
                 {
-                    result.Add(new GetAuthorDto
+                    result.Add(new GetArticleCategoryDto
                     {
                         ArticleCategoryId = articleCategory.ArticleCategoryId,
                         Title = articleCategory.Title,
@@ -68,7 +68,7 @@ namespace Blog.Management.Application
         }
 
         //----------------------------------- UPDATE -----------------------------------\\
-        public async Task<OperationResult> Update(UpdateAuthorDto articleCategoryDto)
+        public async Task<OperationResult> Update(UpdateArticleCategoryDto articleCategoryDto)
         {
             var operation = new OperationResult();
 
@@ -92,7 +92,7 @@ namespace Blog.Management.Application
         }
 
         //----------------------------------- DELETE -----------------------------------\\
-        public async Task<OperationResult> Delete(DeleteAuthorDto articleCategoryDto)
+        public async Task<OperationResult> Delete(DeleteArticleCategoryDto articleCategoryDto)
         {
             var operation = new OperationResult();
 
