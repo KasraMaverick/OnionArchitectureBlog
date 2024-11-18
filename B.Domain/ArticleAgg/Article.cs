@@ -33,6 +33,9 @@ namespace Blog.Management.Domain.ArticleAgg
         }
 
         public void Edit()
+        {
+            LastEditedDate = DateTime.Now;
+        }
 
 
 

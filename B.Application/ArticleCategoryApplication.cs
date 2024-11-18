@@ -55,7 +55,6 @@ namespace Blog.Management.Application
                     {
                         ArticleCategoryId = articleCategory.ArticleCategoryId,
                         Title = articleCategory.Title,
-                        IsDeleted = articleCategory.IsDeleted,
                         CreatedDate = articleCategory.CreatedDate.ToString(CultureInfo.InvariantCulture),
                         UpdatedDate = articleCategory.UpdatedDate.ToString(CultureInfo.InvariantCulture)
                     });
@@ -75,7 +74,8 @@ namespace Blog.Management.Application
 
             try
             {
-                var articleCategory = new ArticleCategory(articleCategoryDto.Title);
+                ArticleCategory articleCategory = await _articleCategoryRepository.GetById(articleCategoryDto.Id);
+                articleCategory.Edit(articleCategoryDto.Title);
                 var res = await _articleCategoryRepository.Edit(articleCategory, articleCategoryDto.Id);
 
                 if (res == null)

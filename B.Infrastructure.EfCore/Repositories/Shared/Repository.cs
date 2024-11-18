@@ -88,7 +88,7 @@ namespace Blog.Management.Infrastructure.EfCore.Repositories.Shared
             return await _dbContext.Set<T>().AnyAsync(expression);
         }
 
-        public async Task<T> Get(long id)
+        public async Task<T> GetById(long id)
         {
             return await _dbContext.FindAsync<T>(new object[1] { id });
         }
