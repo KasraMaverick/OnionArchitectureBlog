@@ -62,6 +62,27 @@ namespace Blog.Management.Infrastructure.EfCore.Repositories.Shared
             }
         }
 
+        public async Task<bool> DeActive(long id)
+        {
+            try
+            {
+                T val = await _dbContext.FindAsync<T>(new object[1] { id });
+                if (val != null)
+                {
+                    _dbContext.Remove(val);
+                    await SaveChanges();
+                    return true;
+                }
+
+                return false;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+
         public async Task<bool> Exists(Expression<Func<T, bool>> expression)
         {
             return await _dbContext.Set<T>().AnyAsync(expression);
