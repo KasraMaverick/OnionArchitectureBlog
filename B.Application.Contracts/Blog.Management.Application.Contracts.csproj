@@ -11,8 +11,4 @@
     <ProjectReference Include="..\B.Domain\Blog.Management.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Article\Dtos\" />
-  </ItemGroup>
-
 </Project>

@@ -34,9 +34,9 @@ namespace Blog.Management.Application
         }
 
         //----------------------------------- GET ALL -----------------------------------\\
-        public async Task<OperationResultWithData<List<GetArticleCategoryDto>>> GetAll()
+        public async Task<OperationResultWithData<List<GetAuthorDto>>> GetAll()
         {
-            var operation = new OperationResultWithData<List<GetArticleCategoryDto>>();
+            var operation = new OperationResultWithData<List<GetAuthorDto>>();
 
             try
             {
@@ -47,15 +47,14 @@ namespace Blog.Management.Application
                     return operation.Failed();
                 }
 
-                var result = new List<GetArticleCategoryDto>();
+                var result = new List<GetAuthorDto>();
 
                 foreach (var articleCategory in res)
                 {
-                    result.Add(new GetArticleCategoryDto
+                    result.Add(new GetAuthorDto
                     {
                         ArticleCategoryId = articleCategory.ArticleCategoryId,
                         Title = articleCategory.Title,
-                        IsDeleted = articleCategory.IsDeleted,
                         CreatedDate = articleCategory.CreatedDate.ToString(CultureInfo.InvariantCulture),
                         UpdatedDate = articleCategory.UpdatedDate.ToString(CultureInfo.InvariantCulture)
                     });
@@ -69,13 +68,14 @@ namespace Blog.Management.Application
         }
 
         //----------------------------------- UPDATE -----------------------------------\\
-        public async Task<OperationResult> Update(UpdateArticleCategoryDto articleCategoryDto)
+        public async Task<OperationResult> Update(UpdateAuthorDto articleCategoryDto)
         {
             var operation = new OperationResult();
 
             try
             {
-                var articleCategory = new ArticleCategory(articleCategoryDto.Title);
+                ArticleCategory articleCategory = await _articleCategoryRepository.GetById(articleCategoryDto.Id);
+                articleCategory.Edit(articleCategoryDto.Title);
                 var res = await _articleCategoryRepository.Edit(articleCategory, articleCategoryDto.Id);
 
                 if (res == null)
@@ -92,7 +92,7 @@ namespace Blog.Management.Application
         }
 
         //----------------------------------- DELETE -----------------------------------\\
-        public async Task<OperationResult> Delete(DeleteArticleCategoryDto articleCategoryDto)
+        public async Task<OperationResult> Delete(DeleteAuthorDto articleCategoryDto)
         {
             var operation = new OperationResult();
 
