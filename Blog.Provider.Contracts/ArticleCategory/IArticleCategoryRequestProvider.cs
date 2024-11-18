@@ -5,9 +5,9 @@ namespace Blog.Provider.Contracts.ArticleCategory
 {
     public interface IArticleCategoryRequestProvider
     {
-        public Task<OperationResultWithData<List<GetArticleCategoryDto>>> GetAll();
+        public Task<OperationResultWithData<List<GetAuthorDto>>> GetAll();
         public Task<OperationResult> Create(CreateArticleCategoryDto articleCategoryDto);
-        public Task<OperationResult> Update(UpdateArticleCategoryDto articleCategoryDto);
-        public Task<OperationResult> Delete(DeleteArticleCategoryDto articleCategoryDto);
+        public Task<OperationResult> Update(UpdateAuthorDto articleCategoryDto);
+        public Task<OperationResult> Delete(DeleteAuthorDto articleCategoryDto);
     }
 }
