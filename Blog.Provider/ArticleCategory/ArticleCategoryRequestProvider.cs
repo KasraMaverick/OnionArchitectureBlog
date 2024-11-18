@@ -15,7 +15,7 @@ namespace Blog.Provider.ArticleCategory
         }
 
         //--------------------- SIMPLE CRUD ---------------------\\
-        public async Task<OperationResultWithData<List<GetAuthorDto>>> GetAll()
+        public async Task<OperationResultWithData<List<GetArticleCategoryDto>>> GetAll()
         {
             return await _articleCategoryApplication.GetAll();
         }
@@ -25,12 +25,12 @@ namespace Blog.Provider.ArticleCategory
            return await _articleCategoryApplication.Create(dto);
         }
 
-        public async Task<OperationResult> Update(UpdateAuthorDto dto)
+        public async Task<OperationResult> Update(UpdateArticleCategoryDto dto)
         {
             return await _articleCategoryApplication.Update(dto);
         }
 
-        public async Task<OperationResult> Delete(DeleteAuthorDto dto)
+        public async Task<OperationResult> Delete(DeleteArticleCategoryDto dto)
         {
             return await _articleCategoryApplication.Delete(dto);
         }
