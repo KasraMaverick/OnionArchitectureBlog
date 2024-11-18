@@ -10,11 +10,14 @@ namespace Blog.Presentation.WebAPI.Controllers
     [ApiController]
     public class AuthorController : ControllerBase
     {
+        //-------------------- INJECTIONS --------------------\\
         private readonly IAuthorRequestProvider _authorRequestProvider;
         public AuthorController(IAuthorRequestProvider authorRequestProvider)
         {
             _authorRequestProvider = authorRequestProvider;
         }
+
+        //--------------------------------------------------------------------------------------------------------------
 
         [HttpGet("GetAll")]
         public async Task<OperationResultWithData<List<GetAuthorDto>>> GetAll()

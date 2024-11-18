@@ -9,11 +9,14 @@ namespace Blog.Presentation.WebAPI.Controllers
     [ApiController]
     public class ArticleCategoryController : ControllerBase
     {
+        //-------------------- INJECTIONS --------------------\\
         private readonly IArticleCategoryRequestProvider _articleCategoryProvider;
         public ArticleCategoryController(IArticleCategoryRequestProvider articleCategoryProvider)
         {
             _articleCategoryProvider = articleCategoryProvider;
         }
+
+        //--------------------------------------------------------------------------------------------------------------
 
         [HttpGet("GetAll")]
         public async Task<OperationResultWithData<List<GetArticleCategoryDto>>> GetAll()
