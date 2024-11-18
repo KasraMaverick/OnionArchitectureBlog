@@ -1,7 +1,5 @@
 ﻿using _0_Framework.Application.Model;
-using Blog.Management.Application.Contracts.ArticleCategory;
 using Blog.Management.Application.Contracts.ArticleCategory.Dtos;
-using Blog.Provider.ArticleCategory;
 using Blog.Provider.Contracts.ArticleCategory;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,7 +16,7 @@ namespace Blog.Presentation.WebAPI.Controllers
         }
 
         [HttpGet("GetAll")]
-        public async Task<OperationResultWithData<List<GetAuthorDto>>> GetAll()
+        public async Task<OperationResultWithData<List<GetArticleCategoryDto>>> GetAll()
         {
             var list = await _articleCategoryProvider.GetAll();
             return list;
@@ -32,16 +30,16 @@ namespace Blog.Presentation.WebAPI.Controllers
         }
 
         [HttpDelete("Delete")]
-        public async Task<OperationResult> Delete(DeleteAuthorDto dto)
+        public async Task<OperationResult> Delete(DeleteArticleCategoryDto dto)
         {
             var res = await _articleCategoryProvider.Delete(dto);
             return res;
         }
 
         [HttpPut("Update")]
-        public async Task<OperationResult> Edit(UpdateAuthorDto command)
+        public async Task<OperationResult> Edit(UpdateArticleCategoryDto dto)
         {
-            var res = await _articleCategoryProvider.Update(command);
+            var res = await _articleCategoryProvider.Update(dto);
             return res;
         }
     }

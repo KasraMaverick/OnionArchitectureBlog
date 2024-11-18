@@ -3,17 +3,21 @@
 using Blog.Management.Application;
 using Blog.Management.Application.Contracts.Article;
 using Blog.Management.Application.Contracts.ArticleCategory;
+using Blog.Management.Application.Contracts.Author;
 using Blog.Management.Application.Contracts.Comment;
 using Blog.Management.Domain.ArticleAgg;
 using Blog.Management.Domain.ArticleCategoryAgg;
+using Blog.Management.Domain.AuthorAgg;
 using Blog.Management.Domain.CommentAgg;
 using Blog.Management.Infrastructure.EfCore;
 using Blog.Management.Infrastructure.EfCore.Repositories;
 using Blog.Provider.Article;
 using Blog.Provider.ArticleCategory;
+using Blog.Provider.Author;
 using Blog.Provider.Comment;
 using Blog.Provider.Contracts.Article;
 using Blog.Provider.Contracts.ArticleCategory;
+using Blog.Provider.Contracts.Author;
 using Blog.Provider.Contracts.Comment;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -48,6 +52,14 @@ namespace Blog.Management.Infrastructure.Core
             services.AddTransient<ICommentRequestProvider, CommentRequestProvider>();
             services.AddTransient<ICommentApplication, CommentApplication>();
             services.AddTransient<ICommentRepository, CommentRepository>();
+
+            #endregion
+
+            #region AUTHOR
+
+            services.AddTransient<IAuthorRequestProvider, AuthorRequestProvider>();
+            services.AddTransient<IAuthorApplication, AuthorApplication>();
+            services.AddTransient<IAuthorRepository, AuthorRepository>();
 
             #endregion
 
