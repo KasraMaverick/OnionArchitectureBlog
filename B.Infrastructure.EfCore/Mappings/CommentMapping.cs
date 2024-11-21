@@ -10,6 +10,7 @@ namespace Blog.Management.Infrastructure.EfCore.Mappings
         {
             
             builder.HasOne(x => x.Author).WithMany(x => x.Comments).HasForeignKey(x => x.AuthorId);
+            builder.HasOne(x => x.Article).WithMany(x => x.Comments).HasForeignKey(x => x.ArticleId);
         }
     }
 }
