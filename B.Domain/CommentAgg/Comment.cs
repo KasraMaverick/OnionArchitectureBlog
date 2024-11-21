@@ -1,4 +1,5 @@
 ﻿using Blog.Management.Domain.ArticleAgg;
+using Blog.Management.Domain.AuthorAgg;
 
 namespace Blog.Management.Domain.CommentAgg
 {
@@ -8,8 +9,10 @@ namespace Blog.Management.Domain.CommentAgg
         public string CommentText { get; private set; }
         public DateTime CreatedDate { get; private set; }
         public DateTime LastUpdatedDate { get; private set; }
+        public long ArticleId { get; private set; }
         public Article Article { get; private set; }
-        //public Author AuthorId { get; private set; }
+        public long AuthorId { get; private set; }
+        public Author Author { get; private set; }
         public bool IsDeleted { get; private set; }
         public int LikesCount { get; private set; }
         public int DislikesCount { get; private set; }

@@ -9,6 +9,7 @@ namespace Blog.Management.Infrastructure.EfCore.Mappings
         public void Configure(EntityTypeBuilder<Comment> builder)
         {
             
+            builder.HasOne(x => x.Author).WithMany(x => x.Comments).HasForeignKey(x => x.AuthorId);
         }
     }
 }
