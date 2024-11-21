@@ -13,8 +13,8 @@ namespace Blog.Management.Domain.ArticleAgg
         public DateTime ArchivedDate { get; private set; }
         public string Content { get; private set; }
         public string Excerpt { get; private set; }
-        public ArticleCategory Category { get; private set; }
-        public long CategoryId { get; private set; }
+        public ArticleCategory ArticleCategory { get; private set; }
+        public long ArticleCategoryId { get; private set; }
         public List<Comment> Comments { get; private set; }
         public string FeaturedImage { get; private set; }
         public DateTime LastEditedDate { get; private set; }

@@ -1,5 +1,7 @@
 ﻿using Blog.Management.Domain.ArticleAgg;
 using Blog.Management.Domain.AuthorAgg;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Blog.Management.Infrastructure.EfCore.Mappings
 {
