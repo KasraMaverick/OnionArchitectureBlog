@@ -1,6 +1,6 @@
 ﻿namespace _0_Framework.Application.Enums
 {
-    public class ArticleStatusEnum
+    public class StatusEnums
     {
         public enum Status
         {

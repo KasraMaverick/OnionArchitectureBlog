@@ -14,8 +14,8 @@ namespace Blog.Management.Domain.AuthorAgg
         public int ArticleCount { get; private set; }
         public DateTime CreatedDate { get; private set; }
         public bool IsActive { get; private set; }
-        public List<Article> AuthorArticles { get; private set; }
-        public List<Comment> AuthorComments { get; private set; }
+        public List<Article> Articles { get; private set; }
+        public List<Comment> Comments { get; private set; }
 
         protected Author() { }
 
