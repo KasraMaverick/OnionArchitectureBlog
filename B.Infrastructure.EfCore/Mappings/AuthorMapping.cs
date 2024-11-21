@@ -19,7 +19,7 @@ namespace Blog.Management.Infrastructure.EfCore.Mappings
             builder.Property(x => x.CreatedDate);
             builder.Property(x => x.IsActive);
 
-
+            //---------- RELATIONSHIPS -----------\\
             builder.HasMany(x => x.Articles).WithOne(x => x.Author).HasForeignKey(x => x.AuthorId);
             builder.HasMany(x => x.Comments).WithOne(x => x.Author).HasForeignKey(x => x.AuthorId);
         }
