@@ -25,6 +25,7 @@ namespace Blog.Management.Infrastructure.EfCore
             modelBuilder.ApplyConfiguration(new ArticleMapping());
             modelBuilder.ApplyConfiguration(new CommentMapping());
             modelBuilder.ApplyConfiguration(new AuthorMapping());
+            
             base.OnModelCreating(modelBuilder);
         }
     }
