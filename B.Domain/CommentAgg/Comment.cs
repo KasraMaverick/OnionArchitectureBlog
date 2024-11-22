@@ -17,11 +17,28 @@ namespace Blog.Management.Domain.CommentAgg
         public int LikesCount { get; private set; }
         public int DislikesCount { get; private set; }
 
-        public Comment(bool IsDeleted)
+        public Comment(string commentText, long articleId, long authorId)
         {
+            CommentText = commentText;
+            ArticleId = articleId;
+            AuthorId = authorId;
             IsDeleted = false;
             CreatedDate = DateTime.Now;
         }
 
+        public void Like()
+        {
+            LikesCount ++;
+        }
+
+        public void DisLike()
+        {
+            DislikesCount --;
+        }
+
+        public void DeleteComment()
+        {
+            IsDeleted = true;
+        }
     }
 }

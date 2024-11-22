@@ -19,14 +19,23 @@ namespace Blog.Management.Domain.AuthorAgg
 
         protected Author() { }
 
-        public Author(string firstName, string lastName)
+        public Author(string firstName, string lastName, string imageUrl, string bio)
         {
             FirstName = firstName;
             LastName = lastName;
             CreatedDate = DateTime.Now;
             IsActive = true;
+            Articles = new List<Article>();
+            Comments = new List<Comment>();
         }
 
+        public void Edit(string firstName, string lastName, string imageUrl, string bio)
+        {
+            FirstName = firstName;
+            LastName = lastName;
+            ImageUrl = imageUrl;
+            Bio = bio;
+        }
 
         public void Active()
         {
@@ -36,5 +45,10 @@ namespace Blog.Management.Domain.AuthorAgg
         {
             IsActive = false;
         }
+        public void AddArticleCount()
+        {
+            ArticleCount ++;
+        }
     }
+
 }

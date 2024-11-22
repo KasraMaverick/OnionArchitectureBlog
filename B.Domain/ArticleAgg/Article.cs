@@ -35,6 +35,7 @@ namespace Blog.Management.Domain.ArticleAgg
             Excerpt = excerpt;
             FeaturedImage = featuredImage;
             Status = (int)StatusEnums.Status.Draft;
+            Comments = new List<Comment>();
         }
 
         public void Edit(long categoryId, string title, string content, string excerpt,string featuredImage)
