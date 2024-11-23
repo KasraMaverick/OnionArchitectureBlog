@@ -1,5 +1,6 @@
 ﻿using Blog.Management.Domain.ArticleAgg;
 using Blog.Management.Infrastructure.EfCore.Repositories.Shared;
+using Microsoft.EntityFrameworkCore;
 
 namespace Blog.Management.Infrastructure.EfCore.Repositories
 {
@@ -27,7 +28,7 @@ namespace Blog.Management.Infrastructure.EfCore.Repositories
             }
             catch (Exception)
             {
-                return null;
+                return;
             }
         }
 
@@ -47,13 +48,13 @@ namespace Blog.Management.Infrastructure.EfCore.Repositories
             }
             catch (Exception)
             {
-                return null;
+                return;
             }
         }
 
-        public async Task GetAll(long authorId)
+        public async Task<List<Article>> GetAll(long authorId)
         {
-            List<Article> articles = await _dbContext.Articles.Where(x => x.AuthorId == authorId).ToListAsync();
+            return await _dbContext.Articles.Where(x => x.AuthorId == authorId).ToListAsync();
         }
     }
 }

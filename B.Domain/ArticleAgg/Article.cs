@@ -51,10 +51,12 @@ namespace Blog.Management.Domain.ArticleAgg
         public void Publish()
         {
             Status = (int)StatusEnums.Status.Published;
+            PublishedDate = DateTime.Now;
         }
         public void Archive()
         {
             Status = (int)StatusEnums.Status.Archived;
+            ArchivedDate = DateTime.Now;
         }
 
 

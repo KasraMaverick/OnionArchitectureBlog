@@ -3,7 +3,6 @@ using Blog.Management.Application.Contracts.ArticleCategory;
 using Blog.Management.Application.Contracts.ArticleCategory.Dtos;
 using Blog.Management.Domain.ArticleCategoryAgg;
 using System.Globalization;
-using System.Net;
 
 namespace Blog.Management.Application
 {
@@ -19,7 +18,7 @@ namespace Blog.Management.Application
         public async Task<OperationResult> Create(CreateArticleCategoryDto articleCategoryDto)
         {
             var operation = new OperationResult();
-            
+
             try
             {
                 var articleCategory = new ArticleCategory(articleCategoryDto.Title);
@@ -30,8 +29,9 @@ namespace Blog.Management.Application
             catch (Exception)
             {
                 throw;
-            } 
+            }
         }
+
 
         //----------------------------------- GET ALL -----------------------------------\\
         public async Task<OperationResultWithData<List<GetArticleCategoryDto>>> GetAll()
@@ -67,6 +67,7 @@ namespace Blog.Management.Application
             }
         }
 
+
         //----------------------------------- UPDATE -----------------------------------\\
         public async Task<OperationResult> Update(UpdateArticleCategoryDto articleCategoryDto)
         {
@@ -91,6 +92,7 @@ namespace Blog.Management.Application
             }
         }
 
+
         //----------------------------------- DELETE -----------------------------------\\
         public async Task<OperationResult> Delete(DeleteArticleCategoryDto articleCategoryDto)
         {
@@ -98,7 +100,7 @@ namespace Blog.Management.Application
 
             try
             {
-                
+
                 var res = await _articleCategoryRepository.Delete(articleCategoryDto.Id);
 
                 if (!res)
@@ -115,5 +117,27 @@ namespace Blog.Management.Application
         }
 
 
+        //----------------------------------- GET TITLE BY ID -----------------------------------\\
+        public async Task<OperationResultWithData<string>> GetTitleById(long categoryId)
+        {
+            var operation = new OperationResultWithData<string>();
+
+            try
+            {
+                var res = await _articleCategoryRepository.GetTitleById(categoryId);
+
+                if (res == null)
+                {
+                    return operation.Failed();
+                }
+
+                return operation.Succeeded(res);
+            }
+            catch (Exception ex)
+            {
+                return operation.Failed();
+            }
+        }
     }
 }
+

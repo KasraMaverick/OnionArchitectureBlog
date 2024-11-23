@@ -2,6 +2,7 @@
 using Blog.Management.Application.Contracts.Article;
 using Blog.Management.Application.Contracts.Article.Dtos;
 using Blog.Management.Domain.ArticleAgg;
+using System.Globalization;
 
 namespace Blog.Management.Application
 {
@@ -23,9 +24,41 @@ namespace Blog.Management.Application
             throw new NotImplementedException();
         }
 
-        public Task<OperationResultWithData<List<GetArticleDto>>> GetAll(long authorId)
+        public async Task<OperationResultWithData<List<GetArticleDto>>> GetAll(long authorId)
         {
-            throw new NotImplementedException();
+            var operation = new OperationResultWithData<List<GetArticleDto>>();
+
+            try
+            {
+                var res = await _articleRepository.GetAll(authorId);
+
+                if (res == null)
+                {
+                    return operation.Failed();
+                }
+
+                var result = new List<GetArticleDto>();
+
+                foreach (var article in res)
+                {
+                    result.Add(new GetArticleDto
+                    {
+                        ArticleId = article.ArticleId,
+                        CategoryId = article.ArticleCategoryId,
+                        Title = article.Title,
+                        Excerpt = article.Excerpt,
+                        Content = article.Content,
+                        FeaturedImage = article.FeaturedImage,
+                        CreatedDate = article.CreatedDate.ToString(CultureInfo.InvariantCulture),
+                        LastEditedDate = article.LastEditedDate.ToString(CultureInfo.InvariantCulture)
+                    });
+                }
+                return operation.Succeeded(result);
+            }
+            catch (Exception ex)
+            {
+                return operation.Failed();
+            }
         }
 
         public async Task<OperationResult> Update(UpdateArticleDto articleDto)
