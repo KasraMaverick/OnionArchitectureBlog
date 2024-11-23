@@ -2,5 +2,6 @@
 {
     public class DeleteArticleDto
     {
+        public long ArticleId { get; set; }
     }
 }
