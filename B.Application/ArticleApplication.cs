@@ -23,14 +23,32 @@ namespace Blog.Management.Application
             throw new NotImplementedException();
         }
 
-        public Task<OperationResultWithData<List<GetArticleDto>>> GetAll()
+        public Task<OperationResultWithData<List<GetArticleDto>>> GetAll(long authorId)
         {
             throw new NotImplementedException();
         }
 
-        public Task<OperationResult> Update(UpdateArticleDto article)
+        public async Task<OperationResult> Update(UpdateArticleDto articleDto)
         {
-            throw new NotImplementedException();
+            var operation = new OperationResult();
+
+            try
+            {
+                Article article = await _articleRepository.GetById(articleDto.Id);
+                article.Edit(articleDto.CategoryId, articleDto.Title, articleDto.Content, articleDto.Excerpt, articleDto.FeaturedImage);
+                var res = await _articleRepository.Edit(article, articleDto.Id);
+
+                if (res == null)
+                {
+                    return operation.Failed();
+                }
+
+                return operation.Succeeded(res);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }
