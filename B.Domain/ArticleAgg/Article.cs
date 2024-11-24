@@ -7,6 +7,8 @@ namespace Blog.Management.Domain.ArticleAgg
 {
     public class Article
     {
+        #region PROPERTIES
+
         public long ArticleId { get; private set; }
         public string Title { get; private set; }
         public DateTime CreatedDate { get; private set; }
@@ -14,14 +16,27 @@ namespace Blog.Management.Domain.ArticleAgg
         public DateTime ArchivedDate { get; private set; }
         public string Content { get; private set; }
         public string Excerpt { get; private set; }
-        public ArticleCategory ArticleCategory { get; private set; }
-        public long ArticleCategoryId { get; private set; }
-        public List<Comment> Comments { get; private set; }
         public string FeaturedImage { get; private set; }
         public DateTime LastEditedDate { get; private set; }
         public int Status { get; private set; }
+
+        //---------- RELATIONSHIPS ----------\\
+
+        //----- TO AUTHOR
         public long AuthorId { get; private set; }
         public Author Author { get; private set; }
+
+        //----- TO COMMENT
+        public List<Comment> Comments { get; private set; }
+
+        //----- TO ARTICLE CATEGORY
+        public ArticleCategory ArticleCategory { get; private set; }
+        public long ArticleCategoryId { get; private set; }
+
+        #endregion
+
+
+        #region CONSTRUCTOR
 
         protected Article() { }
 
@@ -38,6 +53,11 @@ namespace Blog.Management.Domain.ArticleAgg
             Comments = new List<Comment>();
         }
 
+        #endregion
+
+
+        #region METHODS
+
         public void Edit(long categoryId, string title, string content, string excerpt,string featuredImage)
         {
             Title = title;
@@ -53,13 +73,14 @@ namespace Blog.Management.Domain.ArticleAgg
             Status = (int)StatusEnums.Status.Published;
             PublishedDate = DateTime.Now;
         }
+
         public void Archive()
         {
             Status = (int)StatusEnums.Status.Archived;
             ArchivedDate = DateTime.Now;
         }
 
-        
+        #endregion
 
     }
 }

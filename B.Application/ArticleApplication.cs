@@ -8,11 +8,18 @@ namespace Blog.Management.Application
 {
     public class ArticleApplication : IArticleApplication
     {
+        #region INJECTION
+
         private readonly IArticleRepository _articleRepository;
         public ArticleApplication(IArticleRepository articleRepository)
         {
             _articleRepository = articleRepository;   
         }
+
+        #endregion
+
+
+        #region CRUD
 
         public async Task<OperationResult> Create(CreateArticleDto article)
         {
@@ -116,6 +123,11 @@ namespace Blog.Management.Application
             }
         }
 
+        #endregion
+
+
+        #region PUBLISH & ARCHIVE
+
         public async Task<OperationResult> Publish(long articleId)
         {
             var operation = new OperationResult();
@@ -157,5 +169,7 @@ namespace Blog.Management.Application
                 throw;
             }
         }
+
+        #endregion
     }
 }

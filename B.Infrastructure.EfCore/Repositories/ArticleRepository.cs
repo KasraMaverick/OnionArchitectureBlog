@@ -6,11 +6,28 @@ namespace Blog.Management.Infrastructure.EfCore.Repositories
 {
     public class ArticleRepository : Repository<Article>, IArticleRepository
     {
+        #region INJECTION
+
         private readonly BlogContext _dbContext;
         public ArticleRepository(BlogContext dbContext) : base(dbContext)
         {
             _dbContext = dbContext;
         }
+
+        #endregion
+
+
+        #region CRUD
+
+        public async Task<List<Article>> GetAll(long authorId)
+        {
+            return await _dbContext.Articles.Where(x => x.AuthorId == authorId).ToListAsync();
+        }
+
+        #endregion
+
+
+        #region PUBLISH & ARCHIVE
 
         public async Task<bool> Publish(long articleId)
         {
@@ -60,9 +77,6 @@ namespace Blog.Management.Infrastructure.EfCore.Repositories
             }
         }
 
-        public async Task<List<Article>> GetAll(long authorId)
-        {
-            return await _dbContext.Articles.Where(x => x.AuthorId == authorId).ToListAsync();
-        }
+        #endregion
     }
 }

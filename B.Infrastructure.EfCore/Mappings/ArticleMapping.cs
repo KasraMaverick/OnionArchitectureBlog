@@ -9,6 +9,7 @@ namespace Blog.Management.Infrastructure.EfCore.Mappings
     {
         public void Configure(EntityTypeBuilder<Article> builder)
         {
+            //----- PROPERTIES -----\\
             builder.HasKey(x => x.ArticleId);
             builder.Property(x => x.Title);
             builder.Property(x => x.CreatedDate);

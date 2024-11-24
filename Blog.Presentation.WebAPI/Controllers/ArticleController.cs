@@ -9,14 +9,18 @@ namespace Blog.Presentation.WebAPI.Controllers
     [ApiController]
     public class ArticleController : ControllerBase
     {
-        //-------------------- INJECTIONS --------------------\\
+        #region INJECTION
+
         private readonly IArticleRequestProvider _articleRequestProvider;
         public ArticleController(IArticleRequestProvider articleRequestProvider)
         {
             _articleRequestProvider = articleRequestProvider;
         }
 
-        //--------------------------------------------------------------------------------------------------------------
+        #endregion
+
+
+        #region CRUD
 
         [HttpGet("GetAll")]
         public async Task<OperationResultWithData<List<GetArticleDto>>> GetAll(long authorId)
@@ -45,5 +49,27 @@ namespace Blog.Presentation.WebAPI.Controllers
             var res = await _articleRequestProvider.Update(dto);
             return res;
         }
+
+        #endregion
+
+
+        #region PUBLISH & ARCHIVE
+
+        [HttpPut("Publish")]
+        public async Task<OperationResult> Publish(long articleId)
+        {
+            var res = await _articleRequestProvider.Publish(articleId);
+            return res;
+        }
+
+        [HttpPut("Archive")]
+        public async Task<OperationResult> Archive(long articleId)
+        {
+            var res = await _articleRequestProvider.Archive(articleId);
+            return res;
+        }
+
+        #endregion
+
     }
 }
