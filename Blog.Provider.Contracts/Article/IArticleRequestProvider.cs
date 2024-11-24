@@ -9,5 +9,7 @@ namespace Blog.Provider.Contracts.Article
         public Task<OperationResult> Create(CreateArticleDto article);
         public Task<OperationResult> Update(UpdateArticleDto article);
         public Task<OperationResult> Delete(DeleteArticleDto article);
+        public Task<OperationResult> Publish(long articleId);
+        public Task<OperationResult> Archive(long articleId);
     }
 }

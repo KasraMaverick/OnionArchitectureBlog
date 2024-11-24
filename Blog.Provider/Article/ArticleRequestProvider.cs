@@ -43,5 +43,10 @@ namespace Blog.Provider.Article
         {
             throw new NotImplementedException();
         }
+
+        public Task<OperationResult> Publish(long articleId)
+        {
+
+        }
     }
 }

@@ -83,5 +83,47 @@ namespace Blog.Management.Application
                 throw;
             }
         }
+
+        public async Task<OperationResult> Publish(long articleId)
+        {
+            var operation = new OperationResult();
+            try
+            {
+                var res = await _articleRepository.Publish(articleId);
+
+                if (res != null)
+                {
+                    return operation.Succeeded(res);
+                }
+
+                return operation.Failed();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public async Task<OperationResult> Archive(long articleId)
+        {
+            var operation = new OperationResult();
+            try
+            {
+                var res = await _articleRepository.Archive(articleId);
+
+                if (res != null)
+                {
+                    return operation.Succeeded(res);
+                }
+
+                return operation.Failed();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

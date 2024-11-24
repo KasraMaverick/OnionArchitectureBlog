@@ -12,43 +12,51 @@ namespace Blog.Management.Infrastructure.EfCore.Repositories
             _dbContext = dbContext;
         }
 
-        public async Task Publish(long articleId)
+        public async Task<bool> Publish(long articleId)
         {
             try
             {
                 Article val = await _dbContext.FindAsync<Article>(new object[1] { articleId });
-                
-                if (val != null)
+
+                if (articleId == 0 || val == null)
                 {
-                    _dbContext.Entry(val).State = EntityState.Detached;
+                    return false;
                 }
+
+                _dbContext.Entry(val).State = EntityState.Detached;
                 val.Publish();
                 _dbContext.Entry(val).State = EntityState.Modified;
+
                 await SaveChanges();
+                return true;
             }
             catch (Exception)
             {
-                return;
+                return false;
             }
         }
 
-        public async Task Archive(long articleId)
+        public async Task<bool> Archive(long articleId)
         {
             try
             {
                 Article val = await _dbContext.FindAsync<Article>(new object[1] { articleId });
 
-                if (val != null)
+                if (articleId == 0 || val == null)
                 {
-                    _dbContext.Entry(val).State = EntityState.Detached;
+                    return false;
                 }
+
+                _dbContext.Entry(val).State = EntityState.Detached;
                 val.Archive();
                 _dbContext.Entry(val).State = EntityState.Modified;
+
                 await SaveChanges();
+                return true;
             }
             catch (Exception)
             {
-                return;
+                return false;
             }
         }
 
