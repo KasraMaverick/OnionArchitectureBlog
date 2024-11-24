@@ -9,7 +9,6 @@ namespace Blog.Management.Application.Contracts.Article
         Task<OperationResult> Create(CreateArticleDto article);
         Task<OperationResult> Update(UpdateArticleDto article);
         Task<OperationResult> Delete(DeleteArticleDto article);
-        Task<OperationResultWithData<List<GetArticleDto>>> GetTitles(long authorId);
         Task<OperationResult> Publish(long articleId);
         Task<OperationResult> Archive(long articleId);
     }
