@@ -33,7 +33,7 @@ namespace Blog.Provider.Article
 
             foreach (var article in op.Result)
             {
-                var categoryName = categoryResult?.Result.Where(x => x.CategoryId == article.CategoryId).FirstOrDefault().Title ?? "";
+                var categoryName = categoryResult?.Result?.Where(x => x.CategoryId == article.CategoryId).FirstOrDefault().Title ?? "";
                 article.CategoryName = categoryName;
             }
             return op;
