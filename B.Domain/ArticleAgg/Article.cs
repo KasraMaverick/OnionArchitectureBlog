@@ -59,6 +59,7 @@ namespace Blog.Management.Domain.ArticleAgg
             ArchivedDate = DateTime.Now;
         }
 
+        
 
     }
 }

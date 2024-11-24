@@ -14,14 +14,46 @@ namespace Blog.Management.Application
             _articleRepository = articleRepository;   
         }
 
-        public Task<OperationResult> Create(CreateArticleDto article)
+        public async Task<OperationResult> Create(CreateArticleDto article)
         {
-            throw new NotImplementedException();
+            var operation = new OperationResult();
+
+            try
+            {
+                var articleDto = new Article(article.Title, article.CategoryId, article.AuthorId, article.Content, article.Excerpt, article.FeaturedImage);
+                var res = await _articleRepository.Create(articleDto);
+                if (res == null)
+                {
+                    return operation.Failed();
+                }
+
+                return operation.Succeeded(res);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
-        public Task<OperationResult> Delete(DeleteArticleDto article)
+        public async Task<OperationResult> Delete(DeleteArticleDto article)
         {
-            throw new NotImplementedException();
+            var operation = new OperationResult();
+
+            try
+            {
+                
+                var res = await _articleRepository.Delete(article.ArticleId);
+                if (!res)
+                {
+                    return operation.Failed();
+                }
+
+                return operation.Succeeded(res);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public async Task<OperationResultWithData<List<GetArticleDto>>> GetAll(long authorId)
@@ -91,7 +123,7 @@ namespace Blog.Management.Application
             {
                 var res = await _articleRepository.Publish(articleId);
 
-                if (res != null)
+                if (res)
                 {
                     return operation.Succeeded(res);
                 }
@@ -112,7 +144,7 @@ namespace Blog.Management.Application
             {
                 var res = await _articleRepository.Archive(articleId);
 
-                if (res != null)
+                if (res)
                 {
                     return operation.Succeeded(res);
                 }
