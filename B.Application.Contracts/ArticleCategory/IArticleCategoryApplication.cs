@@ -5,10 +5,11 @@ namespace Blog.Management.Application.Contracts.ArticleCategory
 {
     public interface IArticleCategoryApplication
     {
-        public Task<OperationResultWithData<List<GetArticleCategoryDto>>> GetAll();
-        public Task<OperationResult> Create(CreateArticleCategoryDto articleCategory);
-        public Task<OperationResult> Update(UpdateArticleCategoryDto articleCategory);
-        public Task<OperationResult> Delete(DeleteArticleCategoryDto articleCategory);
+        Task<OperationResultWithData<List<GetArticleCategoryDto>>> GetAll();
+        Task<OperationResult> Create(CreateArticleCategoryDto articleCategory);
+        Task<OperationResult> Update(UpdateArticleCategoryDto articleCategory);
+        Task<OperationResult> Delete(DeleteArticleCategoryDto articleCategory);
+        Task<OperationResultWithData<List<GetArticleCategoryTitleDto>>> GetTitles();
 
     }
 }

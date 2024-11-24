@@ -5,7 +5,7 @@ namespace Blog.Provider.Contracts.Article
 {
     public interface IArticleRequestProvider
     {
-        public Task<OperationResultWithData<List<GetArticleDto>>> GetAll();
+        public Task<OperationResultWithData<List<GetArticleDto>>> GetAll(long authorId);
         public Task<OperationResult> Create(CreateArticleDto article);
         public Task<OperationResult> Update(UpdateArticleDto article);
         public Task<OperationResult> Delete(DeleteArticleDto article);

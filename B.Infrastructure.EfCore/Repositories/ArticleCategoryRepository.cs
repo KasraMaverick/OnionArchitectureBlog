@@ -12,15 +12,10 @@ namespace Blog.Management.Infrastructure.EfCore.Repositories
             _dbContext = dbContext;
         }
 
-        public async Task<string> GetTitleById(long categoryId)
+        public async Task<List<ArticleCategory>> GetTitles()
         {
-            List<ArticleCategory> categoryList = await _dbContext.ArticleCategories.Where(x => x.ArticleCategoryId == categoryId).ToListAsync();
-            var category = categoryList.FirstOrDefault();
-            if (category == null)
-            {
-                return null;
-            }
-            return category.Title;
+            List<ArticleCategory> categoryList = await _dbContext.ArticleCategories.Select(x => x.CategoryId, x => x.Title).ToListAsync();
+            return categoryList;
         }
     }
 }

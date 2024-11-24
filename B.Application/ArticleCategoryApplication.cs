@@ -67,6 +67,38 @@ namespace Blog.Management.Application
             }
         }
 
+        //----------------------------------- GET TITLE BY ID -----------------------------------\\
+        public async Task<OperationResultWithData<List<GetArticleCategoryTitleDto>>> GetTitles()
+        {
+            var operation = new OperationResultWithData<List<GetArticleCategoryTitleDto>>();
+
+            try
+            {
+                var res = await _articleCategoryRepository.GetTitles();
+
+                if (res == null)
+                {
+                    return operation.Failed();
+                }
+
+                var result = new List<GetArticleCategoryTitleDto>();
+
+                foreach (var articleCategory in res)
+                {
+                    result.Add(new GetArticleCategoryTitleDto
+                    {
+                        CategoryId = articleCategory.ArticleCategoryId,
+                        Title = articleCategory.Title,
+                    });
+                }
+                return operation.Succeeded(result);
+            }
+            catch (Exception ex)
+            {
+                return operation.Failed();
+            }
+        }
+
 
         //----------------------------------- UPDATE -----------------------------------\\
         public async Task<OperationResult> Update(UpdateArticleCategoryDto articleCategoryDto)
@@ -117,27 +149,7 @@ namespace Blog.Management.Application
         }
 
 
-        //----------------------------------- GET TITLE BY ID -----------------------------------\\
-        public async Task<OperationResultWithData<string>> GetTitleById(long categoryId)
-        {
-            var operation = new OperationResultWithData<string>();
-
-            try
-            {
-                var res = await _articleCategoryRepository.GetTitleById(categoryId);
-
-                if (res == null)
-                {
-                    return operation.Failed();
-                }
-
-                return operation.Succeeded(res);
-            }
-            catch (Exception ex)
-            {
-                return operation.Failed();
-            }
-        }
+        
     }
 }
 
