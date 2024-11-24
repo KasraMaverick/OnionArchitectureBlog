@@ -8,6 +8,8 @@ namespace Blog.Provider.Article
 {
     public class ArticleRequestProvider : IArticleRequestProvider
     {
+        #region INJECTION
+
         private readonly IArticleApplication _articleApplication;
         private readonly IArticleCategoryApplication _articleCategoryApplication;
         public ArticleRequestProvider(IArticleApplication articleApplication, IArticleCategoryApplication articleCategoryApplication)
@@ -15,6 +17,10 @@ namespace Blog.Provider.Article
             _articleApplication = articleApplication;
             _articleCategoryApplication = articleCategoryApplication;
         }
+
+        #endregion
+
+        #region CRUD
 
         public Task<OperationResult> Create(CreateArticleDto article)
         {
@@ -44,9 +50,19 @@ namespace Blog.Provider.Article
             throw new NotImplementedException();
         }
 
-        public Task<OperationResult> Publish(long articleId)
-        {
+        #endregion
 
+        #region PUBLISH AND ARCHIVE
+
+        public async Task<OperationResult> Publish(long articleId)
+        {
+            return await _articleApplication.Publish(articleId);
         }
+        public async Task<OperationResult> Archive(long articleId)
+        {
+            return await _articleApplication.Archive(articleId);
+        }
+
+        #endregion
     }
 }

@@ -11,11 +11,5 @@ namespace Blog.Management.Infrastructure.EfCore.Repositories
         {
             _dbContext = dbContext;
         }
-
-        public async Task<List<ArticleCategory>> GetTitles()
-        {
-            List<ArticleCategory> categoryList = await _dbContext.ArticleCategories.Select(x => x.CategoryId, x => x.Title).ToListAsync();
-            return categoryList;
-        }
     }
 }

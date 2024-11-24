@@ -5,6 +5,5 @@ namespace Blog.Management.Domain.ArticleCategoryAgg
 {
     public interface IArticleCategoryRepository : IRepository<ArticleCategory>
     {
-        Task<List<ArticleCategory>> GetTitles();
     }
 }

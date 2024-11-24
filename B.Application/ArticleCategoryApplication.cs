@@ -74,7 +74,7 @@ namespace Blog.Management.Application
 
             try
             {
-                var res = await _articleCategoryRepository.GetTitles();
+                var res = await _articleCategoryRepository.Get();
 
                 if (res == null)
                 {

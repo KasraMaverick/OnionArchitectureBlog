@@ -19,9 +19,9 @@ namespace Blog.Presentation.WebAPI.Controllers
         //--------------------------------------------------------------------------------------------------------------
 
         [HttpGet("GetAll")]
-        public async Task<OperationResultWithData<List<GetArticleDto>>> GetAll()
+        public async Task<OperationResultWithData<List<GetArticleDto>>> GetAll(long authorId)
         {
-            var list = await _articleRequestProvider.GetAll();
+            var list = await _articleRequestProvider.GetAll(authorId);
             return list;
         }
 
