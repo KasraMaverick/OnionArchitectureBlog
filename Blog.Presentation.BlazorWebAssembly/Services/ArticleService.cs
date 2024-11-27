@@ -7,6 +7,9 @@ namespace Blog.Presentation.BlazorWebAssembly.Services
 {
     public class ArticleService
     {
+
+        #region INJECTION
+
         private readonly HttpClient _httpClient;
         private readonly string _endpoint;
         private readonly string _mediaType = "application/json";
@@ -15,6 +18,11 @@ namespace Blog.Presentation.BlazorWebAssembly.Services
             _httpClient = httpClient;
             _endpoint = "https://localhost:7170/api/";
         }
+
+        #endregion
+
+
+        #region PUBLISH & ARCHIVE
 
         public async Task<bool> Publish(long articleId)
         {
@@ -75,5 +83,7 @@ namespace Blog.Presentation.BlazorWebAssembly.Services
 
             return true;
         }
+
+        #endregion
     }
 }
