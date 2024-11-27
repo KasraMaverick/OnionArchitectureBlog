@@ -29,17 +29,19 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blog.Presentation.WebAPI", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "B.UI", "B.UI", "{1F1F98F2-CF2B-43DF-8172-A36A5CB5EBA0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog.Presentation.BlazorWebAssembly", "Blog.Presentation.BlazorWebAssembly\Blog.Presentation.BlazorWebAssembly.csproj", "{DFB9C449-3475-4975-AF33-351A840B3E70}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blog.Presentation.BlazorWebAssembly", "Blog.Presentation.BlazorWebAssembly\Blog.Presentation.BlazorWebAssembly.csproj", "{DFB9C449-3475-4975-AF33-351A840B3E70}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "0_Framework", "0_Framework\0_Framework.csproj", "{9DD1E429-43CF-4C90-B438-615DDBBFAEC3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "0_Framework", "0_Framework\0_Framework.csproj", "{9DD1E429-43CF-4C90-B438-615DDBBFAEC3}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Blog.Provider", "Blog.Provider", "{BF67E27C-9E72-494E-ABB8-5C5DD011E84D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog.Provider", "Blog.Provider\Blog.Provider.csproj", "{604C92C8-39DA-4E6F-84A7-B263B73E51F6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blog.Provider", "Blog.Provider\Blog.Provider.csproj", "{604C92C8-39DA-4E6F-84A7-B263B73E51F6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog.Provider.Contracts", "Blog.Provider.Contracts\Blog.Provider.Contracts.csproj", "{77384D5B-1134-4553-A055-38C9640AC6A4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blog.Provider.Contracts", "Blog.Provider.Contracts\Blog.Provider.Contracts.csproj", "{77384D5B-1134-4553-A055-38C9640AC6A4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog.Shared", "Blog.Shared\Blog.Shared.csproj", "{7DE2147D-7567-47E7-BE9C-59D71B0A58BE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blog.Shared", "Blog.Shared\Blog.Shared.csproj", "{7DE2147D-7567-47E7-BE9C-59D71B0A58BE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog.Management.Infrastructure.Redis", "Blog.Management.Infrastructure.Redis\Blog.Management.Infrastructure.Redis.csproj", "{D1A7BA8E-22A9-4477-BEA3-7CB975C4FBCF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -91,6 +93,10 @@ Global
 		{7DE2147D-7567-47E7-BE9C-59D71B0A58BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7DE2147D-7567-47E7-BE9C-59D71B0A58BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7DE2147D-7567-47E7-BE9C-59D71B0A58BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D1A7BA8E-22A9-4477-BEA3-7CB975C4FBCF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D1A7BA8E-22A9-4477-BEA3-7CB975C4FBCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D1A7BA8E-22A9-4477-BEA3-7CB975C4FBCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D1A7BA8E-22A9-4477-BEA3-7CB975C4FBCF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -111,6 +117,7 @@ Global
 		{604C92C8-39DA-4E6F-84A7-B263B73E51F6} = {BF67E27C-9E72-494E-ABB8-5C5DD011E84D}
 		{77384D5B-1134-4553-A055-38C9640AC6A4} = {BF67E27C-9E72-494E-ABB8-5C5DD011E84D}
 		{7DE2147D-7567-47E7-BE9C-59D71B0A58BE} = {1F1F98F2-CF2B-43DF-8172-A36A5CB5EBA0}
+		{D1A7BA8E-22A9-4477-BEA3-7CB975C4FBCF} = {29DCB8FB-ED4B-4BF9-9CCD-CE06D4532EDD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5CDF2EA9-9F9A-4249-B8FF-CF0808570DD1}

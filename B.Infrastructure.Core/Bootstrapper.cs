@@ -11,6 +11,7 @@ using Blog.Management.Domain.AuthorAgg;
 using Blog.Management.Domain.CommentAgg;
 using Blog.Management.Infrastructure.EfCore;
 using Blog.Management.Infrastructure.EfCore.Repositories;
+using Blog.Management.Infrastructure.Redis;
 using Blog.Provider.Article;
 using Blog.Provider.ArticleCategory;
 using Blog.Provider.Author;
@@ -21,6 +22,7 @@ using Blog.Provider.Contracts.Author;
 using Blog.Provider.Contracts.Comment;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using StackExchange.Redis;
 
 #endregion
 
@@ -39,13 +41,16 @@ namespace Blog.Management.Infrastructure.Core
 
             #endregion
 
+
             #region ARTICLE
 
             services.AddTransient<IArticleRequestProvider, ArticleRequestProvider>();
             services.AddTransient<IArticleApplication, ArticleApplication>();
             services.AddTransient<IArticleRepository,  ArticleRepository>();
+            services.AddTransient<IArticleCategoryCacheService, ArticleCategoryCacheService>();
 
             #endregion
+
 
             #region COMMENT
 
@@ -55,6 +60,7 @@ namespace Blog.Management.Infrastructure.Core
 
             #endregion
 
+
             #region AUTHOR
 
             services.AddTransient<IAuthorRequestProvider, AuthorRequestProvider>();
@@ -63,7 +69,14 @@ namespace Blog.Management.Infrastructure.Core
 
             #endregion
 
+
+            #region DATABASES
+
             services.AddDbContext<BlogContext>(options => options.UseSqlServer("BlogDb"));
+            services.AddSingleton<IConnectionMultiplexer>(ConnectionMultiplexer.Connect("localhost"));
+
+            #endregion
+
         }
     }
 }
