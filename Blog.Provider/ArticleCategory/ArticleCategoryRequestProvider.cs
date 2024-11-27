@@ -8,13 +8,19 @@ namespace Blog.Provider.ArticleCategory
     public class ArticleCategoryRequestProvider : IArticleCategoryRequestProvider
     {
 
+        #region INJECTION
+
         private readonly IArticleCategoryApplication _articleCategoryApplication;
         public ArticleCategoryRequestProvider(IArticleCategoryApplication articleCategoryApplication)
         {
             _articleCategoryApplication = articleCategoryApplication;
         }
 
-        //--------------------- SIMPLE CRUD ---------------------\\
+        #endregion
+
+
+        #region CRUD
+
         public async Task<OperationResultWithData<List<GetArticleCategoryDto>>> GetAll()
         {
             return await _articleCategoryApplication.GetAll();
@@ -34,5 +40,7 @@ namespace Blog.Provider.ArticleCategory
         {
             return await _articleCategoryApplication.Delete(dto);
         }
+
+        #endregion
     }
 }

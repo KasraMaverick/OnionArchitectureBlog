@@ -9,14 +9,19 @@ namespace Blog.Presentation.WebAPI.Controllers
     [ApiController]
     public class ArticleCategoryController : ControllerBase
     {
-        //-------------------- INJECTIONS --------------------\\
+        
+        #region INJECTION
+
         private readonly IArticleCategoryRequestProvider _articleCategoryProvider;
         public ArticleCategoryController(IArticleCategoryRequestProvider articleCategoryProvider)
         {
             _articleCategoryProvider = articleCategoryProvider;
         }
 
-        //--------------------------------------------------------------------------------------------------------------
+        #endregion
+
+
+        #region CRUD
 
         [HttpGet("GetAll")]
         public async Task<OperationResultWithData<List<GetArticleCategoryDto>>> GetAll()
@@ -45,5 +50,8 @@ namespace Blog.Presentation.WebAPI.Controllers
             var res = await _articleCategoryProvider.Update(dto);
             return res;
         }
+
+        #endregion
+
     }
 }

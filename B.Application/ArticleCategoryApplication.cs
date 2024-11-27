@@ -8,11 +8,18 @@ namespace Blog.Management.Application
 {
     public class ArticleCategoryApplication : IArticleCategoryApplication
     {
+        #region INJECTION
+
         private readonly IArticleCategoryRepository _articleCategoryRepository;
         public ArticleCategoryApplication(IArticleCategoryRepository articleCategoryRepository)
         {
             _articleCategoryRepository = articleCategoryRepository;
         }
+
+        #endregion
+
+
+        #region CRUD
 
         //----------------------------------- CREATE -----------------------------------\\
         public async Task<OperationResult> Create(CreateArticleCategoryDto articleCategoryDto)
@@ -148,8 +155,8 @@ namespace Blog.Management.Application
             }
         }
 
+        #endregion
 
-        
     }
 }
 
