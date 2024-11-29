@@ -10,6 +10,7 @@ namespace Blog.Presentation.WebAPI.Controllers
     [ApiController]
     public class AuthorController : ControllerBase
     {
+
         #region INJECTION
 
         private readonly IAuthorRequestProvider _authorRequestProvider;
@@ -71,5 +72,6 @@ namespace Blog.Presentation.WebAPI.Controllers
         }
 
         #endregion
+
     }
 }

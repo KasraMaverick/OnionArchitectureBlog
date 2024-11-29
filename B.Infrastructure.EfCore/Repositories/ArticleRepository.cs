@@ -24,6 +24,30 @@ namespace Blog.Management.Infrastructure.EfCore.Repositories
             return await _dbContext.Articles.Where(x => x.AuthorId == authorId).ToListAsync();
         }
 
+        public async Task<bool> Activate(long articleId)
+        {
+            try
+            {
+                Article val = await _dbContext.FindAsync<Article>(new object[1] { articleId });
+
+                if (articleId == 0 || val == null)
+                {
+                    return false;
+                }
+
+                _dbContext.Entry(val).State = EntityState.Detached;
+                val.Activate();
+                _dbContext.Entry(val).State = EntityState.Modified;
+
+                await SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
         #endregion
 
 

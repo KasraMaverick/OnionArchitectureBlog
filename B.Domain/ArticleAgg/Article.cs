@@ -19,6 +19,8 @@ namespace Blog.Management.Domain.ArticleAgg
         public string FeaturedImage { get; private set; }
         public DateTime LastEditedDate { get; private set; }
         public int Status { get; private set; }
+        public bool Active { get; private set; }
+
 
         //---------- RELATIONSHIPS ----------\\
 
@@ -51,6 +53,7 @@ namespace Blog.Management.Domain.ArticleAgg
             FeaturedImage = featuredImage;
             Status = (int)StatusEnums.Status.Draft;
             Comments = new List<Comment>();
+            Active = true;
         }
 
         #endregion
@@ -78,6 +81,16 @@ namespace Blog.Management.Domain.ArticleAgg
         {
             Status = (int)StatusEnums.Status.Archived;
             ArchivedDate = DateTime.Now;
+        }
+
+        public void Activate()
+        {
+            Active = true;
+        }
+
+        public void DeActivate()
+        {
+            Active = false;
         }
 
         #endregion

@@ -8,6 +8,7 @@ namespace Blog.Management.Application
 {
     public class ArticleApplication : IArticleApplication
     {
+
         #region INJECTION
 
         private readonly IArticleRepository _articleRepository;
@@ -170,6 +171,42 @@ namespace Blog.Management.Application
             }
         }
 
+        public async Task<OperationResult> ActivateArticlesForAuthor(long authorId)
+        {
+            var operation = new OperationResult();
+            try
+            {
+                if (authorId == 0)
+                {
+                    return operation.Failed();
+                }
+
+                var articleList = await _articleRepository.GetAll(authorId);
+
+                if (articleList == null)
+                {
+                    return operation.Failed();
+                }
+
+                foreach (var article in articleList)
+                {
+                    var res = await _articleRepository.Activate(article.ArticleId);
+                    if (!res)
+                    {
+                        return operation.Failed();
+                    }
+                }
+                return operation.Succeeded();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+           
+        }
+
         #endregion
+
     }
 }

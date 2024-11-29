@@ -7,6 +7,7 @@ namespace Blog.Management.Application
 {
     public class AuthorApplication : IAuthorApplication
     {
+
         #region INJECTION
 
         private readonly IAuthorRepository _authorRepository;
@@ -89,5 +90,6 @@ namespace Blog.Management.Application
         }
 
         #endregion
+
     }
 }

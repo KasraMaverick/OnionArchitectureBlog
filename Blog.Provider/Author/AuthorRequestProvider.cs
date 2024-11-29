@@ -55,18 +55,25 @@ namespace Blog.Provider.Author
 
         #region ACTIVATE/DEACTIVATE
 
-        public Task<OperationResult> Activate(long authorId)
+        public async Task<OperationResult> Activate(long authorId)
         {
+            //------ STEP 1: ACTIVATE ARTICLES FOR THIS AUTHOR
+            var articleActivationResult = await _articleApplication.ActivateArticlesForAuthor(authorId);
+            if (!articleActivationResult.IsSucceeded)
+            {
+                return articleActivationResult;
+            }
 
+            //------ STEP 2: ACTIVATE COMMENTS WRITTEN FOR THIS AUTHOR
 
+            
 
-
-            return _authorApplication.Activate(authorId);
+            return await _authorApplication.Activate(authorId);
         }
 
-        public Task<OperationResult> Deactivate(long authorId)
+        public async Task<OperationResult> Deactivate(long authorId)
         {
-            return _authorApplication.Activate(authorId);
+            return await _authorApplication.Activate(authorId);
         }
 
         #endregion
