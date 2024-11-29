@@ -5,9 +5,11 @@ namespace Blog.Management.Application.Contracts.Author
 {
     public interface IAuthorApplication
     {
-        public Task<OperationResultWithData<List<GetAuthorDto>>> GetAll();
-        public Task<OperationResult> Create(CreateAuthorDto author);
-        public Task<OperationResult> Update(UpdateAuthorDto author);
-        public Task<OperationResult> Delete(DeleteAuthorDto author);
+        Task<OperationResultWithData<List<GetAuthorDto>>> GetAll();
+        Task<OperationResult> Create(CreateAuthorDto author);
+        Task<OperationResult> Update(UpdateAuthorDto author);
+        Task<OperationResult> Delete(DeleteAuthorDto author);
+        Task<OperationResult> Activate(long authorId);
+        Task<OperationResult> DeActivate(long authorId);
     }
 }

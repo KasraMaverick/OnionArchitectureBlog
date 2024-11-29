@@ -37,11 +37,11 @@ namespace Blog.Management.Domain.AuthorAgg
             Bio = bio;
         }
 
-        public void Active()
+        public void Activate()
         {
             IsActive = true;
         }
-        public void DeActive()
+        public void DeActivate()
         {
             IsActive = false;
         }

@@ -10,14 +10,18 @@ namespace Blog.Presentation.WebAPI.Controllers
     [ApiController]
     public class AuthorController : ControllerBase
     {
-        //-------------------- INJECTIONS --------------------\\
+        #region INJECTION
+
         private readonly IAuthorRequestProvider _authorRequestProvider;
         public AuthorController(IAuthorRequestProvider authorRequestProvider)
         {
             _authorRequestProvider = authorRequestProvider;
         }
 
-        //--------------------------------------------------------------------------------------------------------------
+        #endregion
+
+
+        #region CRUD
 
         [HttpGet("GetAll")]
         public async Task<OperationResultWithData<List<GetAuthorDto>>> GetAll()
@@ -46,5 +50,26 @@ namespace Blog.Presentation.WebAPI.Controllers
             var res = await _authorRequestProvider.Update(dto);
             return res;
         }
+
+        #endregion
+
+
+        #region ACTIVATE/DEACTIVATE
+
+        [HttpPut("Activate")]
+        public async Task<OperationResult> Activate(long authorId)
+        {
+            var res = await _authorRequestProvider.Activate(authorId);
+            return res;
+        }
+
+        [HttpPut("Deactivate")]
+        public async Task<OperationResult> Edit(long authorId)
+        {
+            var res = await _authorRequestProvider.Deactivate(authorId);
+            return res;
+        }
+
+        #endregion
     }
 }
