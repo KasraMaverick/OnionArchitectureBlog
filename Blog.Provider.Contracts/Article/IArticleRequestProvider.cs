@@ -11,6 +11,5 @@ namespace Blog.Provider.Contracts.Article
         Task<OperationResult> Delete(DeleteArticleDto article);
         Task<OperationResult> Publish(long articleId);
         Task<OperationResult> Archive(long articleId);
-        Task<OperationResult> ActivateArticlesForAuthor(long authorId);
     }
 }
