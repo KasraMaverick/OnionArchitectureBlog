@@ -19,8 +19,7 @@ namespace Blog.Management.Infrastructure.EfCore.Repositories
         #endregion
 
 
-        #region ACTIVATE/DEACTIVATE
-
+        #region ADD-ARTICLE-COUNT / ACTIVATE / DEACTIVATE
 
         public async Task<bool> AddArticleCount(long authorId)
         {

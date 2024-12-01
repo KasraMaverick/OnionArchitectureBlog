@@ -24,6 +24,12 @@ namespace Blog.Management.Infrastructure.EfCore.Repositories
             return await _dbContext.Articles.Where(x => x.AuthorId == authorId).ToListAsync();
         }
 
+
+        #endregion
+
+
+        #region PUBLISH & ARCHIVE & ACTIVATE
+
         public async Task<bool> Activate(long articleId)
         {
             try
@@ -47,11 +53,6 @@ namespace Blog.Management.Infrastructure.EfCore.Repositories
                 return false;
             }
         }
-
-        #endregion
-
-
-        #region PUBLISH & ARCHIVE
 
         public async Task<bool> Publish(long articleId)
         {
