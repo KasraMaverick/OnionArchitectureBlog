@@ -2,6 +2,7 @@
 using Blog.Management.Application.Contracts.Article;
 using Blog.Management.Application.Contracts.Article.Dtos;
 using Blog.Management.Application.Contracts.ArticleCategory;
+using Blog.Management.Application.Contracts.Author;
 using Blog.Provider.Contracts.Article;
 
 namespace Blog.Provider.Article
@@ -12,10 +13,14 @@ namespace Blog.Provider.Article
 
         private readonly IArticleApplication _articleApplication;
         private readonly IArticleCategoryApplication _articleCategoryApplication;
-        public ArticleRequestProvider(IArticleApplication articleApplication, IArticleCategoryApplication articleCategoryApplication)
+        private readonly IAuthorApplication _authorApplication;
+        public ArticleRequestProvider(IArticleApplication articleApplication,
+                                      IArticleCategoryApplication articleCategoryApplication,
+                                      IAuthorApplication authorApplication)
         {
             _articleApplication = articleApplication;
             _articleCategoryApplication = articleCategoryApplication;
+            _authorApplication = authorApplication;
         }
 
         #endregion
@@ -23,9 +28,12 @@ namespace Blog.Provider.Article
 
         #region CRUD
 
-        public Task<OperationResult> Create(CreateArticleDto article)
+        public async Task<OperationResult> Create(CreateArticleDto article)
         {
-            throw new NotImplementedException();
+            //---------- CALLS AUTHOR SERVICE TO ++ ARTICLE COUNT
+            await _authorApplication.AddArticleCount(article.AuthorId);
+
+            return await _articleApplication.Create(article);
         }
 
         public Task<OperationResult> Delete(DeleteArticleDto article)
@@ -40,15 +48,15 @@ namespace Blog.Provider.Article
 
             foreach (var article in op.Result)
             {
-                var categoryName = categoryResult?.Result?.Where(x => x.CategoryId == article.CategoryId).FirstOrDefault().Title ?? "";
+                var categoryName = categoryResult?.Result?.Where(x => x.CategoryId == article.CategoryId)?.FirstOrDefault()?.Title ?? "";
                 article.CategoryName = categoryName;
             }
             return op;
         }
 
-        public Task<OperationResult> Update(UpdateArticleDto article)
+        public async Task<OperationResult> Update(UpdateArticleDto article)
         {
-            throw new NotImplementedException();
+            return await _articleApplication.Update(article);   
         }
 
         #endregion

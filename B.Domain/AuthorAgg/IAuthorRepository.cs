@@ -7,5 +7,6 @@ namespace Blog.Management.Domain.AuthorAgg
     {
         Task<bool> Deactivate(long authorId);
         Task<bool> Activate(long authorId);
+        Task<bool> AddArticleCount(long authorId);
     }
 }

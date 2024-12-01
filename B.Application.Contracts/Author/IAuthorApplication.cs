@@ -11,5 +11,6 @@ namespace Blog.Management.Application.Contracts.Author
         Task<OperationResult> Delete(DeleteAuthorDto author);
         Task<OperationResult> Activate(long authorId);
         Task<OperationResult> DeActivate(long authorId);
+        Task<OperationResult> AddArticleCount(long authorId);
     }
 }

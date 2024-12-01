@@ -37,15 +37,55 @@ namespace Blog.Management.Application
             throw new NotImplementedException();
         }
 
-        public Task<OperationResult> Update(UpdateAuthorDto author)
+        public async Task<OperationResult> Update(UpdateAuthorDto author)
         {
-            throw new NotImplementedException();
+            var operation = new OperationResult();
+
+            try
+            {
+                Author article = await _authorRepository.GetById(author.AuthorId);
+                article.Edit(author.FirstName, author.LastName, author.ImageUrl, author.Bio);
+                var res = await _authorRepository.Edit(article, author.AuthorId);
+
+                if (res == null)
+                {
+                    return operation.Failed();
+                }
+
+                return operation.Succeeded(res);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         #endregion
 
 
-        #region ACTIVATE/DEACTIVATE
+        #region ADD-ARTICLE-COUNT / ACTIVATE / DEACTIVATE
+
+        public async Task<OperationResult> AddArticleCount(long authorId)
+        {
+
+            var operation = new OperationResult();
+            try
+            {
+                var res = await _authorRepository.AddArticleCount(authorId);
+
+                if (res)
+                {
+                    return operation.Succeeded(res);
+                }
+
+                return operation.Failed();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
 
         public async Task<OperationResult> Activate(long authorId)
         {

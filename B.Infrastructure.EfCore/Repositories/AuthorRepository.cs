@@ -21,6 +21,37 @@ namespace Blog.Management.Infrastructure.EfCore.Repositories
 
         #region ACTIVATE/DEACTIVATE
 
+
+        public async Task<bool> AddArticleCount(long authorId)
+        {
+            try
+            {
+                if (authorId == 0)
+                {
+                    return false;
+                }
+
+                Author? val = await _dbContext.FindAsync<Author>(new object[1] { authorId });
+
+
+                if (val == null)
+                {
+                    return false;
+                }
+
+                _dbContext.Entry(val).State = EntityState.Detached;
+                val.AddArticleCount();
+                _dbContext.Entry(val).State = EntityState.Modified;
+
+                await SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
         public async Task<bool> Activate(long authorId)
         {
             try
@@ -30,7 +61,7 @@ namespace Blog.Management.Infrastructure.EfCore.Repositories
                     return false;
                 }
 
-                Author val = await _dbContext.FindAsync<Author>(new object[1] { authorId });
+                Author? val = await _dbContext.FindAsync<Author>(new object[1] { authorId });
                
 
                 if (val == null)
@@ -60,7 +91,7 @@ namespace Blog.Management.Infrastructure.EfCore.Repositories
                     return false;
                 }
 
-                Author val = await _dbContext.FindAsync<Author>(new object[1] { authorId });
+                Author? val = await _dbContext.FindAsync<Author>(new object[1] { authorId });
 
 
                 if (val == null)
