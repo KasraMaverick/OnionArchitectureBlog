@@ -3,17 +3,23 @@ using Blog.Management.Application.Contracts.ArticleCategory;
 using Blog.Management.Application.Contracts.ArticleCategory.Dtos;
 using Blog.Management.Domain.ArticleCategoryAgg;
 using System.Globalization;
+using _0_Framework.Log;
 
 namespace Blog.Management.Application
 {
     public class ArticleCategoryApplication : IArticleCategoryApplication
     {
+
         #region INJECTION
 
         private readonly IArticleCategoryRepository _articleCategoryRepository;
-        public ArticleCategoryApplication(IArticleCategoryRepository articleCategoryRepository)
+        private readonly ILogService _logService;
+        const string className = nameof(ArticleCategoryApplication);
+        public ArticleCategoryApplication(IArticleCategoryRepository articleCategoryRepository,
+                                          ILogService logService)
         {
             _articleCategoryRepository = articleCategoryRepository;
+            _logService = logService;
         }
 
         #endregion
@@ -30,11 +36,18 @@ namespace Blog.Management.Application
             {
                 var articleCategory = new ArticleCategory(articleCategoryDto.Title);
                 var res = await _articleCategoryRepository.Create(articleCategory);
+                if (res == null)
+                {
+                    _logService.LogError(@$"{className}/Create", "create results were null"); //-- LOG (ERR) --
+                    return operation.Failed();
+                }
 
+                _logService.LogInformation($@"{className}/Create", "create was successful"); //-- LOG (INF) --
                 return operation.Succeeded(res);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                _logService.LogException(ex, className, "exception error in create"); //-- LOG (EXC) --
                 throw;
             }
         }
@@ -51,6 +64,7 @@ namespace Blog.Management.Application
 
                 if (res == null)
                 {
+                    _logService.LogWarning($@"{className}/Getall", "getall results were null"); //-- LOG (WAR) --
                     return operation.Failed();
                 }
 
@@ -66,10 +80,13 @@ namespace Blog.Management.Application
                         UpdatedDate = articleCategory.UpdatedDate.ToString(CultureInfo.InvariantCulture)
                     });
                 }
+
+                _logService.LogInformation($@"{className}/GetAll", "getall was successful"); //-- LOG (INF) --
                 return operation.Succeeded(result);
             }
             catch (Exception ex)
             {
+                _logService.LogException(ex, className, "exception error in getall"); // -- LOG (EXC) --
                 return operation.Failed();
             }
         }
@@ -85,6 +102,7 @@ namespace Blog.Management.Application
 
                 if (res == null)
                 {
+                    _logService.LogWarning($@"{className}/GetTitles", "get-titles results were null"); //-- LOG (WAR) --
                     return operation.Failed();
                 }
 
@@ -98,10 +116,13 @@ namespace Blog.Management.Application
                         Title = articleCategory.Title,
                     });
                 }
+
+                _logService.LogInformation($@"{className}/GetTitles", "get-titles was successful"); //-- LOG (INF) --
                 return operation.Succeeded(result);
             }
             catch (Exception ex)
             {
+                _logService.LogException(ex, className, "exception error in get-titles"); // -- LOG (EXC) --
                 return operation.Failed();
             }
         }
@@ -120,13 +141,16 @@ namespace Blog.Management.Application
 
                 if (res == null)
                 {
+                    _logService.LogError(@$"{className}/Update", "update results were null"); //-- LOG (ERR) --
                     return operation.Failed();
                 }
 
+                _logService.LogInformation($@"{className}/Update", "update was successful"); //-- LOG (INF) -
                 return operation.Succeeded(res);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                _logService.LogException(ex, className, "exception error in update"); // -- LOG (EXE) --
                 throw;
             }
         }
@@ -139,18 +163,20 @@ namespace Blog.Management.Application
 
             try
             {
-
                 var res = await _articleCategoryRepository.Delete(articleCategoryDto.Id);
 
                 if (!res)
                 {
+                    _logService.LogError(@$"{className}/Create", "create results were null"); //-- LOG (ERR) --
                     return operation.Failed();
                 }
 
+                _logService.LogInformation($@"{className}/Delete", "delete was successful"); //-- LOG (INF) --
                 return operation.Succeeded(res);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                _logService.LogException(ex, className, "exception error in delete"); // -- LOG (EXC) -
                 throw;
             }
         }
