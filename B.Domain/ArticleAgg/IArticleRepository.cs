@@ -8,5 +8,6 @@ namespace Blog.Management.Domain.ArticleAgg
         Task<bool> Publish(long articleId);
         Task<bool> Archive(long articleId);
         Task<bool> Activate(long articleId);
+        Task<bool> Deactivate(long articleId);
     }
 }

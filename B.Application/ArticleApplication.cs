@@ -12,9 +12,12 @@ namespace Blog.Management.Application
 
         #region INJECTION
 
+        //---------- CONSTANT VARIABLE ----------\\
+        const string className = nameof(ArticleApplication);
+
         private readonly IArticleRepository _articleRepository;
         private readonly ILogService _logService;
-        const string className = nameof(ArticleApplication);
+
         public ArticleApplication(IArticleRepository articleRepository, ILogService logService)
         {
             _articleRepository = articleRepository;   
@@ -49,27 +52,6 @@ namespace Blog.Management.Application
             }
         }
 
-        public async Task<OperationResult> Delete(DeleteArticleDto article)
-        {
-            var operation = new OperationResult();
-
-            try
-            {
-                
-                var res = await _articleRepository.Delete(article.ArticleId);
-                if (!res)
-                {
-                    return operation.Failed();
-                }
-
-                return operation.Succeeded(res);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
         public async Task<OperationResultWithData<List<GetArticleDto>>> GetAll(long authorId)
         {
             var operation = new OperationResultWithData<List<GetArticleDto>>();
@@ -80,6 +62,7 @@ namespace Blog.Management.Application
 
                 if (res == null)
                 {
+                    _logService.LogWarning(@$"{className}/GetAll", "getall results were null");
                     return operation.Failed();
                 }
 
@@ -99,10 +82,13 @@ namespace Blog.Management.Application
                         LastEditedDate = article.LastEditedDate.ToString(CultureInfo.InvariantCulture)
                     });
                 }
+
+
                 return operation.Succeeded(result);
             }
             catch (Exception ex)
             {
+                _logService.LogException(ex, className, "exception error in getall");
                 return operation.Failed();
             }
         }
@@ -119,13 +105,15 @@ namespace Blog.Management.Application
 
                 if (res == null)
                 {
+                    _logService.LogError(@$"{className}/Update", "update results were null");
                     return operation.Failed();
                 }
 
                 return operation.Succeeded(res);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                _logService.LogException(ex, className, "exception error in update");
                 throw;
             }
         }
@@ -133,7 +121,7 @@ namespace Blog.Management.Application
         #endregion
 
 
-        #region PUBLISH & ARCHIVE
+        #region PUBLISH & ARCHIVE & ACTIVATE & DEACTIVATE
 
         public async Task<OperationResult> Publish(long articleId)
         {
@@ -147,11 +135,12 @@ namespace Blog.Management.Application
                     return operation.Succeeded(res);
                 }
 
+                _logService.LogError(@$"{className}/Publish", "publish results were false");
                 return operation.Failed();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                _logService.LogException(ex, className, "exception error in publish");
                 throw;
             }
         }
@@ -168,11 +157,12 @@ namespace Blog.Management.Application
                     return operation.Succeeded(res);
                 }
 
+                _logService.LogError(@$"{className}/Archive", "archive results were null");
                 return operation.Failed();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                _logService.LogException(ex, className, "exception error in archive");
                 throw;
             }
         }
@@ -184,6 +174,7 @@ namespace Blog.Management.Application
             {
                 if (authorId == 0)
                 {
+                    _logService.LogError(@$"{className}/Activate", "authorid is zero");
                     return operation.Failed();
                 }
 
@@ -191,6 +182,7 @@ namespace Blog.Management.Application
 
                 if (articleList == null)
                 {
+                    _logService.LogWarning(@$"{className}/GetAll", "getall results were null");
                     return operation.Failed();
                 }
 
@@ -199,17 +191,56 @@ namespace Blog.Management.Application
                     var res = await _articleRepository.Activate(article.ArticleId);
                     if (!res)
                     {
+                        _logService.LogError(@$"{className}/Activate", "activate result was false");
                         return operation.Failed();
                     }
                 }
                 return operation.Succeeded();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                _logService.LogException(ex, className, "exception error in activate");
                 throw;
             }
            
+        }
+
+        public async Task<OperationResult> DeactivateArticlesForAuthor(long authorId)
+        {
+            var operation = new OperationResult();
+            try
+            {
+                if (authorId == 0)
+                {
+                    _logService.LogError(@$"{className}/Deactivate", "authorid is zero");
+                    return operation.Failed();
+                }
+
+                var articleList = await _articleRepository.GetAll(authorId);
+
+                if (articleList == null)
+                {
+                    _logService.LogWarning(@$"{className}/GetAll", "getall results were null");
+                    return operation.Failed();
+                }
+
+                foreach (var article in articleList)
+                {
+                    var res = await _articleRepository.Deactivate(article.ArticleId);
+                    if (!res)
+                    {
+                        _logService.LogError(@$"{className}/Deactivate", "deactivate result was false");
+                        return operation.Failed();
+                    }
+                }
+                return operation.Succeeded();
+            }
+            catch (Exception ex)
+            {
+                _logService.LogException(ex, className, "exception error in deactivate");
+                throw;
+            }
+
         }
 
         #endregion

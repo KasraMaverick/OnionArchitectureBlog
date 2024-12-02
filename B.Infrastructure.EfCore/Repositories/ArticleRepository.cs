@@ -34,7 +34,7 @@ namespace Blog.Management.Infrastructure.EfCore.Repositories
         {
             try
             {
-                Article val = await _dbContext.FindAsync<Article>(new object[1] { articleId });
+                Article? val = await _dbContext.FindAsync<Article>(new object[1] { articleId });
 
                 if (articleId == 0 || val == null)
                 {
@@ -53,6 +53,31 @@ namespace Blog.Management.Infrastructure.EfCore.Repositories
                 return false;
             }
         }
+
+        public async Task<bool> Deactivate(long articleId)
+        {
+            try
+            {
+                Article? val = await _dbContext.FindAsync<Article>(new object[1] { articleId });
+
+                if (articleId == 0 || val == null)
+                {
+                    return false;
+                }
+
+                _dbContext.Entry(val).State = EntityState.Detached;
+                val.DeActivate();
+                _dbContext.Entry(val).State = EntityState.Modified;
+
+                await SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
 
         public async Task<bool> Publish(long articleId)
         {
