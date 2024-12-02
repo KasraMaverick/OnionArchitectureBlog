@@ -3,6 +3,7 @@ using Blog.Management.Application.Contracts.Article;
 using Blog.Management.Application.Contracts.Article.Dtos;
 using Blog.Management.Domain.ArticleAgg;
 using System.Globalization;
+using _0_Framework.Log;
 
 namespace Blog.Management.Application
 {
@@ -12,9 +13,12 @@ namespace Blog.Management.Application
         #region INJECTION
 
         private readonly IArticleRepository _articleRepository;
-        public ArticleApplication(IArticleRepository articleRepository)
+        private readonly ILogService _logService;
+        const string className = nameof(ArticleApplication);
+        public ArticleApplication(IArticleRepository articleRepository, ILogService logService)
         {
             _articleRepository = articleRepository;   
+            _logService = logService;
         }
 
         #endregion
@@ -32,6 +36,7 @@ namespace Blog.Management.Application
                 var res = await _articleRepository.Create(articleDto);
                 if (res == null)
                 {
+                    _logService.LogError(@$"{className}/Create", "create results were null");
                     return operation.Failed();
                 }
 

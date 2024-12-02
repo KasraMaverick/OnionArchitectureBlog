@@ -1,5 +1,6 @@
 ﻿#region USINGS
 
+using _0_Framework.Log;
 using Blog.Management.Application;
 using Blog.Management.Application.Contracts.Article;
 using Blog.Management.Application.Contracts.ArticleCategory;
@@ -70,10 +71,12 @@ namespace Blog.Management.Infrastructure.Core
             #endregion
 
 
-            #region DATABASES
+            #region DATABASES & LOGGING
 
             services.AddDbContext<BlogContext>(options => options.UseSqlServer("BlogDb"));
             services.AddSingleton<IConnectionMultiplexer>(ConnectionMultiplexer.Connect("localhost"));
+
+            services.AddSingleton<ILogService, LogService>();
 
             #endregion
 
