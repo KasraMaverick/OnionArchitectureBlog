@@ -17,12 +17,12 @@ namespace _0_Framework.Log
 
         public void LogInformation(string location, string message)
         {
-            _seriLog.Information(message);
+            _seriLog.Information(@$"Location: {location} ||| Message: {message}");
         }
 
         public void LogWarning(string location, string message)
         {
-            _seriLog.Warning(message);
+            _seriLog.Warning(@$"Location: {location} ||| Message: {message}");
         }
 
         public void LogException(Exception ex, string className, string message)

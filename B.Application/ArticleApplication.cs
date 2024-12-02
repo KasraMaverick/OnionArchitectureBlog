@@ -42,8 +42,9 @@ namespace Blog.Management.Application
 
                 return operation.Succeeded(res);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                _logService.LogException(ex, className, "exception error in create");
                 throw;
             }
         }
