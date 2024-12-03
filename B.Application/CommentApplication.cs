@@ -1,4 +1,5 @@
 ﻿using _0_Framework.Application.Model;
+using _0_Framework.Log;
 using Blog.Management.Application.Contracts.Comment;
 using Blog.Management.Application.Contracts.Comment.Dtos;
 using Blog.Management.Domain.CommentAgg;
@@ -8,9 +9,12 @@ namespace Blog.Management.Application
     public class CommentApplication : ICommentApplication
     {
         private readonly ICommentRepository _commentRepository;
-        public CommentApplication(ICommentRepository commentRepository)
+        private readonly ILogService _logService;
+        public CommentApplication(ICommentRepository commentRepository,
+                                  ILogService logService)
         {
             _commentRepository = commentRepository;
+            _logService = logService;
         }
 
 

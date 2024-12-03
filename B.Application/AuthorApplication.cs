@@ -1,4 +1,6 @@
-﻿using _0_Framework.Application.Model;
+﻿using System.Globalization;
+using _0_Framework.Application.Model;
+using _0_Framework.Log;
 using Blog.Management.Application.Contracts.Author;
 using Blog.Management.Application.Contracts.Author.Dtos;
 using Blog.Management.Domain.AuthorAgg;
@@ -10,10 +12,15 @@ namespace Blog.Management.Application
 
         #region INJECTION
 
+        private readonly ILogService _logService;
         private readonly IAuthorRepository _authorRepository;
-        public AuthorApplication(IAuthorRepository authorRepository)
+        const string className = nameof(AuthorApplication);
+
+        public AuthorApplication(IAuthorRepository authorRepository,
+                                 ILogService logService)
         {
             _authorRepository = authorRepository;
+            _logService = logService;
         }
 
         #endregion
@@ -26,15 +33,44 @@ namespace Blog.Management.Application
             throw new NotImplementedException();
         }
 
-
-        public Task<OperationResult> Delete(DeleteAuthorDto author)
+        public async Task<OperationResultWithData<List<GetAuthorDto>>> GetAll()
         {
-            throw new NotImplementedException();
-        }
+            var operation = new OperationResultWithData<List<GetAuthorDto>>();
 
-        public Task<OperationResultWithData<List<GetAuthorDto>>> GetAll()
-        {
-            throw new NotImplementedException();
+            try
+            {
+                var res = await _authorRepository.Get();
+
+                if (res == null)
+                {
+                    _logService.LogWarning(@$"{className}/GetAll", "getall results were null");
+                    return operation.Failed();
+                }
+
+                var result = new List<GetAuthorDto>();
+
+                foreach (var author in res)
+                {
+                    result.Add(new GetAuthorDto
+                    {
+                        AuthorId = author.AuthorId,
+                        FirstName = author.FirstName,
+                        LastName = author.LastName,
+                        ImageUrl = author.ImageUrl,
+                        Bio = author.Bio,
+                        ArticleCount = author.ArticleCount,
+                        CreatedDate = author.CreatedDate.ToString(CultureInfo.InvariantCulture),
+                    });
+                }
+
+                _logService.LogInformation(@$"{className}/GetAll", "getall was successful");
+                return operation.Succeeded(result);
+            }
+            catch (Exception ex)
+            {
+                _logService.LogException(ex, className, "exception error in getall");
+                return operation.Failed();
+            }
         }
 
         public async Task<OperationResult> Update(UpdateAuthorDto author)
@@ -44,18 +80,23 @@ namespace Blog.Management.Application
             try
             {
                 Author article = await _authorRepository.GetById(author.AuthorId);
+
                 article.Edit(author.FirstName, author.LastName, author.ImageUrl, author.Bio);
+
                 var res = await _authorRepository.Edit(article, author.AuthorId);
 
                 if (res == null)
                 {
+                    _logService.LogError(@$"{className}/Update", "update results were null");
                     return operation.Failed();
                 }
 
+                _logService.LogInformation(@$"{className}/Update", "update was successful");
                 return operation.Succeeded(res);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                _logService.LogException(ex, className, "exception error in activate");
                 throw;
             }
         }
@@ -75,14 +116,16 @@ namespace Blog.Management.Application
 
                 if (res)
                 {
+                    _logService.LogInformation(@$"{className}/AddArticleCount", "addarticlecount results were true");
                     return operation.Succeeded(res);
                 }
 
+                _logService.LogError(@$"{className}/AddArticleCount", "addarticlecount results were false");
                 return operation.Failed();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                _logService.LogException(ex, className, "exception error in addarticlecount");
                 throw;
             }
         }
@@ -96,14 +139,16 @@ namespace Blog.Management.Application
 
                 if (res)
                 {
+                    _logService.LogInformation(@$"{className}/Activate", "activate results were true");
                     return operation.Succeeded(res);
                 }
 
+                _logService.LogError(@$"{className}/Activate", "activate results were false");
                 return operation.Failed();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                _logService.LogException(ex, className, "exception error in activate");
                 throw;
             }
         }
@@ -117,14 +162,16 @@ namespace Blog.Management.Application
 
                 if (res)
                 {
+                    _logService.LogInformation(@$"{className}/DeActivate", "deactivate results were true");
                     return operation.Succeeded(res);
                 }
 
+                _logService.LogError(@$"{className}/Deactivate", "deactivate results were false");
                 return operation.Failed();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                _logService.LogException(ex, className, "exception error in deactivate");
                 throw;
             }
         }

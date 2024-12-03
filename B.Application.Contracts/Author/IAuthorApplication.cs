@@ -8,7 +8,6 @@ namespace Blog.Management.Application.Contracts.Author
         Task<OperationResultWithData<List<GetAuthorDto>>> GetAll();
         Task<OperationResult> Create(CreateAuthorDto author);
         Task<OperationResult> Update(UpdateAuthorDto author);
-        Task<OperationResult> Delete(DeleteAuthorDto author);
         Task<OperationResult> Activate(long authorId);
         Task<OperationResult> DeActivate(long authorId);
         Task<OperationResult> AddArticleCount(long authorId);
