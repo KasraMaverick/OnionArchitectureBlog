@@ -39,15 +39,16 @@ namespace Blog.Management.Application
                 var res = await _articleRepository.Create(articleDto);
                 if (res == null)
                 {
-                    _logService.LogError(@$"{className}/Create", "create results were null");
+                    _logService.LogError(@$"{className}/Create", "create results were null"); //-- LOG (ERR) --
                     return operation.Failed();
                 }
 
+                _logService.LogInformation($@"{className}/Create", "create results were successful"); //-- LOG (INF) --
                 return operation.Succeeded(res);
             }
             catch (Exception ex)
             {
-                _logService.LogException(ex, className, "exception error in create");
+                _logService.LogException(ex, className, "exception error in create"); //-- LOG (EXC) --
                 throw;
             }
         }
@@ -62,7 +63,7 @@ namespace Blog.Management.Application
 
                 if (res == null)
                 {
-                    _logService.LogWarning(@$"{className}/GetAll", "getall results were null");
+                    _logService.LogWarning(@$"{className}/GetAll", "getall results were null"); //-- LOG (WAR) --
                     return operation.Failed();
                 }
 
@@ -83,12 +84,12 @@ namespace Blog.Management.Application
                     });
                 }
 
-
+                _logService.LogInformation($@"{className}/GetAll", "getall results were successful"); //-- LOG (INF) --
                 return operation.Succeeded(result);
             }
             catch (Exception ex)
             {
-                _logService.LogException(ex, className, "exception error in getall");
+                _logService.LogException(ex, className, "exception error in getall"); //-- LOG (EXC) --
                 return operation.Failed();
             }
         }
@@ -105,15 +106,16 @@ namespace Blog.Management.Application
 
                 if (res == null)
                 {
-                    _logService.LogError(@$"{className}/Update", "update results were null");
+                    _logService.LogError(@$"{className}/Update", "update results were null"); //-- LOG (ERR) --
                     return operation.Failed();
                 }
 
+                _logService.LogInformation($@"{className}/Update", "update results were successful"); //-- LOG (ERR) --
                 return operation.Succeeded(res);
             }
             catch (Exception ex)
             {
-                _logService.LogException(ex, className, "exception error in update");
+                _logService.LogException(ex, className, "exception error in update"); //-- LOG (EXC) --
                 throw;
             }
         }
@@ -132,15 +134,16 @@ namespace Blog.Management.Application
 
                 if (res)
                 {
+                    _logService.LogInformation($@"{className}/Publish", "publish results were true"); //-- LOG (INF) --
                     return operation.Succeeded(res);
                 }
 
-                _logService.LogError(@$"{className}/Publish", "publish results were false");
+                _logService.LogError(@$"{className}/Publish", "publish results were false"); //-- LOG (ERR) --
                 return operation.Failed();
             }
             catch (Exception ex)
             {
-                _logService.LogException(ex, className, "exception error in publish");
+                _logService.LogException(ex, className, "exception error in publish"); //-- LOG (EXC) --
                 throw;
             }
         }
@@ -154,15 +157,16 @@ namespace Blog.Management.Application
 
                 if (res)
                 {
+                    _logService.LogInformation($@"{className}/Archive", "archive results were true"); //-- LOG (INF) --
                     return operation.Succeeded(res);
                 }
 
-                _logService.LogError(@$"{className}/Archive", "archive results were null");
+                _logService.LogError(@$"{className}/Archive", "archive results were false"); //-- LOG (ERR) --
                 return operation.Failed();
             }
             catch (Exception ex)
             {
-                _logService.LogException(ex, className, "exception error in archive");
+                _logService.LogException(ex, className, "exception error in archive"); //-- LOG (EXC) --
                 throw;
             }
         }
@@ -174,7 +178,7 @@ namespace Blog.Management.Application
             {
                 if (authorId == 0)
                 {
-                    _logService.LogError(@$"{className}/Activate", "authorid is zero");
+                    _logService.LogError(@$"{className}/Activate", "authorid is zero"); //-- LOG (ERR) --
                     return operation.Failed();
                 }
 
@@ -182,7 +186,7 @@ namespace Blog.Management.Application
 
                 if (articleList == null)
                 {
-                    _logService.LogWarning(@$"{className}/GetAll", "getall results were null");
+                    _logService.LogWarning(@$"{className}/GetAll", "getall results were null"); //-- LOG (WAR) --
                     return operation.Failed();
                 }
 
@@ -191,15 +195,17 @@ namespace Blog.Management.Application
                     var res = await _articleRepository.Activate(article.ArticleId);
                     if (!res)
                     {
-                        _logService.LogError(@$"{className}/Activate", "activate result was false");
+                        _logService.LogError(@$"{className}/Activate", "activate result was false"); //-- LOG (ERR) --
                         return operation.Failed();
                     }
                 }
+
+                _logService.LogInformation($@"{className}/Activate", "activate results were true and successful"); //-- LOG (INF) --
                 return operation.Succeeded();
             }
             catch (Exception ex)
             {
-                _logService.LogException(ex, className, "exception error in activate");
+                _logService.LogException(ex, className, "exception error in activate"); //-- LOG (EXC) --
                 throw;
             }
            
@@ -212,7 +218,7 @@ namespace Blog.Management.Application
             {
                 if (authorId == 0)
                 {
-                    _logService.LogError(@$"{className}/Deactivate", "authorid is zero");
+                    _logService.LogError(@$"{className}/Deactivate", "authorid is zero"); //-- LOG (ERR) --
                     return operation.Failed();
                 }
 
@@ -220,7 +226,7 @@ namespace Blog.Management.Application
 
                 if (articleList == null)
                 {
-                    _logService.LogWarning(@$"{className}/GetAll", "getall results were null");
+                    _logService.LogWarning(@$"{className}/GetAll", "getall results were null"); //-- LOG (WAR) --
                     return operation.Failed();
                 }
 
@@ -229,15 +235,17 @@ namespace Blog.Management.Application
                     var res = await _articleRepository.Deactivate(article.ArticleId);
                     if (!res)
                     {
-                        _logService.LogError(@$"{className}/Deactivate", "deactivate result was false");
+                        _logService.LogError(@$"{className}/Deactivate", "deactivate result was false"); //-- LOG (ERR) --
                         return operation.Failed();
                     }
                 }
+
+                _logService.LogInformation($@"{className}/Dectivate", "deactivate results were true and successful"); //-- LOG (INF) --
                 return operation.Succeeded();
             }
             catch (Exception ex)
             {
-                _logService.LogException(ex, className, "exception error in deactivate");
+                _logService.LogException(ex, className, "exception error in deactivate"); //-- LOG (EXC) --
                 throw;
             }
 

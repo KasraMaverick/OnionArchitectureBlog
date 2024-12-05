@@ -8,6 +8,9 @@ namespace Blog.Management.Application
 {
     public class CommentApplication : ICommentApplication
     {
+
+        #region INJECTION
+
         private readonly ICommentRepository _commentRepository;
         private readonly ILogService _logService;
         public CommentApplication(ICommentRepository commentRepository,
@@ -17,6 +20,10 @@ namespace Blog.Management.Application
             _logService = logService;
         }
 
+        #endregion
+
+
+        #region CRUD
 
         public Task<OperationResult> Create(CreateCommentDto comment)
         {
@@ -37,5 +44,8 @@ namespace Blog.Management.Application
         {
             throw new NotImplementedException();
         }
+
+        #endregion
+
     }
 }

@@ -1,4 +1,5 @@
-﻿using Blog.Management.Domain.ArticleAgg;
+﻿using _0_Framework.Log;
+using Blog.Management.Domain.ArticleAgg;
 using Blog.Management.Infrastructure.EfCore.Repositories.Shared;
 using Microsoft.EntityFrameworkCore;
 
@@ -6,12 +7,16 @@ namespace Blog.Management.Infrastructure.EfCore.Repositories
 {
     public class ArticleRepository : Repository<Article>, IArticleRepository
     {
+
         #region INJECTION
 
         private readonly BlogContext _dbContext;
-        public ArticleRepository(BlogContext dbContext) : base(dbContext)
+        private readonly ILogService _logService;
+        const string className = nameof(ArticleRepository);
+        public ArticleRepository(BlogContext dbContext, ILogService logService) : base(dbContext)
         {
             _dbContext = dbContext;
+            _logService = logService;
         }
 
         #endregion
@@ -34,10 +39,17 @@ namespace Blog.Management.Infrastructure.EfCore.Repositories
         {
             try
             {
+                if (articleId == 0)
+                {
+                    _logService.LogError($@"{className}/Activate", "articleid was zero");
+                    return false;
+                }
+                
                 Article? val = await _dbContext.FindAsync<Article>(new object[1] { articleId });
 
-                if (articleId == 0 || val == null)
+                if (val == null)
                 {
+                    
                     return false;
                 }
 
@@ -46,10 +58,12 @@ namespace Blog.Management.Infrastructure.EfCore.Repositories
                 _dbContext.Entry(val).State = EntityState.Modified;
 
                 await SaveChanges();
+                _logService.LogError($@"{className}/Activate", "activate result was successfully saved");
                 return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                _logService.LogException(ex, className, "exception error in activation");
                 return false;
             }
         }
@@ -128,5 +142,6 @@ namespace Blog.Management.Infrastructure.EfCore.Repositories
         }
 
         #endregion
+
     }
 }

@@ -43,7 +43,7 @@ namespace Blog.Management.Application
 
                 if (res == null)
                 {
-                    _logService.LogWarning(@$"{className}/GetAll", "getall results were null");
+                    _logService.LogWarning(@$"{className}/GetAll", "getall results were null"); //-- LOG (WAR) --
                     return operation.Failed();
                 }
 
@@ -63,12 +63,12 @@ namespace Blog.Management.Application
                     });
                 }
 
-                _logService.LogInformation(@$"{className}/GetAll", "getall was successful");
+                _logService.LogInformation(@$"{className}/GetAll", "getall was successful"); //-- LOG (INF) --
                 return operation.Succeeded(result);
             }
             catch (Exception ex)
             {
-                _logService.LogException(ex, className, "exception error in getall");
+                _logService.LogException(ex, className, "exception error in getall"); //-- LOG (EXC) --
                 return operation.Failed();
             }
         }
@@ -87,16 +87,16 @@ namespace Blog.Management.Application
 
                 if (res == null)
                 {
-                    _logService.LogError(@$"{className}/Update", "update results were null");
+                    _logService.LogError(@$"{className}/Update", "update results were null"); //-- LOG (ERR) --
                     return operation.Failed();
                 }
 
-                _logService.LogInformation(@$"{className}/Update", "update was successful");
-                return operation.Succeeded(res);
+                _logService.LogInformation(@$"{className}/Update", "update was successful"); //-- LOG (INF) --
+                return operation.Succeeded(res); 
             }
             catch (Exception ex)
             {
-                _logService.LogException(ex, className, "exception error in activate");
+                _logService.LogException(ex, className, "exception error in activate"); //-- LOG (EXC) --
                 throw;
             }
         }
@@ -116,16 +116,16 @@ namespace Blog.Management.Application
 
                 if (res)
                 {
-                    _logService.LogInformation(@$"{className}/AddArticleCount", "addarticlecount results were true");
+                    _logService.LogInformation(@$"{className}/AddArticleCount", "addarticlecount results were true"); //-- LOG (INF) --
                     return operation.Succeeded(res);
                 }
 
-                _logService.LogError(@$"{className}/AddArticleCount", "addarticlecount results were false");
+                _logService.LogError(@$"{className}/AddArticleCount", "addarticlecount results were false"); //-- LOG (ERR) --
                 return operation.Failed();
             }
             catch (Exception ex)
             {
-                _logService.LogException(ex, className, "exception error in addarticlecount");
+                _logService.LogException(ex, className, "exception error in addarticlecount"); //-- LOG (EXC) --
                 throw;
             }
         }
@@ -139,16 +139,16 @@ namespace Blog.Management.Application
 
                 if (res)
                 {
-                    _logService.LogInformation(@$"{className}/Activate", "activate results were true");
+                    _logService.LogInformation(@$"{className}/Activate", "activate results were true"); //-- LOG (INF) --
                     return operation.Succeeded(res);
                 }
 
-                _logService.LogError(@$"{className}/Activate", "activate results were false");
+                _logService.LogError(@$"{className}/Activate", "activate results were false"); //-- LOG (ERR) --
                 return operation.Failed();
             }
             catch (Exception ex)
             {
-                _logService.LogException(ex, className, "exception error in activate");
+                _logService.LogException(ex, className, "exception error in activate"); //-- LOG (EXC) --
                 throw;
             }
         }
@@ -162,16 +162,16 @@ namespace Blog.Management.Application
 
                 if (res)
                 {
-                    _logService.LogInformation(@$"{className}/DeActivate", "deactivate results were true");
+                    _logService.LogInformation(@$"{className}/DeActivate", "deactivate results were true"); //-- LOG (INF) --
                     return operation.Succeeded(res);
                 }
 
-                _logService.LogError(@$"{className}/Deactivate", "deactivate results were false");
+                _logService.LogError(@$"{className}/Deactivate", "deactivate results were false"); //-- LOG (ERR) --
                 return operation.Failed();
             }
             catch (Exception ex)
             {
-                _logService.LogException(ex, className, "exception error in deactivate");
+                _logService.LogException(ex, className, "exception error in deactivate"); //-- LOG (EXC) --
                 throw;
             }
         }
