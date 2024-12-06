@@ -5,9 +5,11 @@ namespace Blog.Management.Application.Contracts.Comment
 {
     public interface ICommentApplication
     {
-        public Task<OperationResult> Create(CreateCommentDto comment);
-        public Task<OperationResultWithData<List<GetCommentForArticleDto>>> GetAll();
-        public Task<OperationResult> Update(EditCommentDto comment);
-        public Task<OperationResult> Delete(DeleteCommentDto comment);
+        Task<OperationResult> Create(CreateCommentDto comment);
+        Task<OperationResultWithData<List<GetCommentForArticleDto>>> GetAll(long articleId);
+        Task<OperationResult> Update(EditCommentDto comment);
+        Task<OperationResult> ActivateForArticle(long articleId);
+        Task<OperationResult> DeactivateForArticle(long articleId);
+        
     }
 }

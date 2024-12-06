@@ -13,11 +13,51 @@ namespace Blog.Management.Application
 
         private readonly ICommentRepository _commentRepository;
         private readonly ILogService _logService;
+        const string className = nameof(CommentApplication);
         public CommentApplication(ICommentRepository commentRepository,
                                   ILogService logService)
         {
             _commentRepository = commentRepository;
             _logService = logService;
+        }
+
+        public async Task<OperationResult> ActivateForArticle(long articleId)
+        {
+            var operation = new OperationResult();
+            try
+            {
+                if (articleId == 0)
+                {
+                    _logService.LogError(@$"{className}/Activate", "articleId is zero"); //-- LOG (ERR) --
+                    return operation.Failed();
+                }
+
+                var commentList = await _commentRepository.GetAll(articleId);
+
+                if (commentList == null)
+                {
+                    _logService.LogWarning(@$"{className}/GetAll", "getall results were null"); //-- LOG (WAR) --
+                    return operation.Failed();
+                }
+
+                foreach (var comment in commentList)
+                {
+                    var res = await _commentRepository.Activate(comment.ArticleId);
+                    if (!res)
+                    {
+                        _logService.LogError(@$"{className}/Activate", "activate result was false"); //-- LOG (ERR) --
+                        return operation.Failed();
+                    }
+                }
+
+                _logService.LogInformation($@"{className}/Activate", "activate results were true and successful"); //-- LOG (INF) --
+                return operation.Succeeded();
+            }
+            catch (Exception ex)
+            {
+                _logService.LogException(ex, className, "exception error in activate"); //-- LOG (EXC) --
+                throw;
+            }
         }
 
         #endregion
@@ -30,12 +70,12 @@ namespace Blog.Management.Application
             throw new NotImplementedException();
         }
 
-        public Task<OperationResult> Delete(DeleteCommentDto comment)
+        public Task<OperationResult> DeactivateForArticle(long articleId)
         {
-            throw new NotImplementedException();
+            
         }
 
-        public Task<OperationResultWithData<List<GetCommentForArticleDto>>> GetAll()
+        public Task<OperationResultWithData<List<GetCommentForArticleDto>>> GetAll(long articleId)
         {
             throw new NotImplementedException();
         }

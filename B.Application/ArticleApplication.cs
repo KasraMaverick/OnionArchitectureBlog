@@ -208,7 +208,6 @@ namespace Blog.Management.Application
                 _logService.LogException(ex, className, "exception error in activate"); //-- LOG (EXC) --
                 throw;
             }
-           
         }
 
         public async Task<OperationResult> DeactivateArticlesForAuthor(long authorId)
