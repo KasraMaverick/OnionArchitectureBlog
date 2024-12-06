@@ -5,6 +5,9 @@ namespace Blog.Management.Domain.CommentAgg
 {
     public class Comment
     {
+
+        #region PROPERTIES
+
         public long CommentId { get; private set; }
         public string CommentText { get; private set; }
         public DateTime CreatedDate { get; private set; }
@@ -13,19 +16,36 @@ namespace Blog.Management.Domain.CommentAgg
         public Article Article { get; private set; }
         public long AuthorId { get; private set; }
         public Author Author { get; private set; }
-        public bool IsDeleted { get; private set; }
+        public bool IsActive { get; private set; }
         public int LikesCount { get; private set; }
         public int DislikesCount { get; private set; }
+
+        #endregion
+
+
+        #region CONSTRUCTOR
+
+        protected Comment() { }
 
         public Comment(string commentText, long articleId, long authorId)
         {
             CommentText = commentText;
             ArticleId = articleId;
             AuthorId = authorId;
-            IsDeleted = false;
+            IsActive = false;
             CreatedDate = DateTime.Now;
         }
 
+        #endregion
+
+
+        #region METHODS
+
+        public void Edit(string commentText)
+        {
+            CommentText = commentText;
+            LastUpdatedDate = DateTime.Now;
+        }
         public void Like()
         {
             LikesCount ++;
@@ -36,9 +56,16 @@ namespace Blog.Management.Domain.CommentAgg
             DislikesCount --;
         }
 
-        public void DeleteComment()
+        public void Activate()
         {
-            IsDeleted = true;
+            IsActive = true;
         }
+
+        public void Deactivate()
+        {
+            IsActive = false;
+        }
+
+        #endregion
     }
 }
