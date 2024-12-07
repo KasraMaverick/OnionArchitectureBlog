@@ -21,6 +21,33 @@ namespace Blog.Management.Application
             _logService = logService;
         }
 
+        #endregion
+
+
+        #region CRUD
+
+        public Task<OperationResult> Create(CreateCommentDto comment)
+        {
+            throw new NotImplementedException();
+        }
+
+
+        public Task<OperationResultWithData<List<GetCommentForArticleDto>>> GetAll(long articleId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<OperationResult> Update(EditCommentDto comment)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
+
+
+        #region ACTIVATE/DEACTIVATE FOR ARTICLE
+
+        //----------------------- ACTIVATE -----------------------\\
         public async Task<OperationResult> ActivateForArticle(long articleId)
         {
             var operation = new OperationResult();
@@ -60,16 +87,7 @@ namespace Blog.Management.Application
             }
         }
 
-        #endregion
-
-
-        #region CRUD
-
-        public Task<OperationResult> Create(CreateCommentDto comment)
-        {
-            throw new NotImplementedException();
-        }
-
+        //----------------------- DEACTIVATE -----------------------\\
         public async Task<OperationResult> DeactivateForArticle(long articleId)
         {
             var operation = new OperationResult();
@@ -107,16 +125,6 @@ namespace Blog.Management.Application
                 _logService.LogException(ex, className, "exception error in deactivate"); //-- LOG (EXC) --
                 throw;
             }
-        }
-
-        public Task<OperationResultWithData<List<GetCommentForArticleDto>>> GetAll(long articleId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<OperationResult> Update(EditCommentDto comment)
-        {
-            throw new NotImplementedException();
         }
 
         #endregion

@@ -12,7 +12,7 @@ namespace Blog.Management.Infrastructure.EfCore.Mappings
             builder.Property(x => x.CommentText);
             builder.Property(x => x.CreatedDate);
             builder.Property(x => x.LastUpdatedDate);
-            builder.Property(x => x.IsDeleted);
+            builder.Property(x => x.IsActive);
             builder.Property(x => x.LikesCount);
             builder.Property(x => x.DislikesCount);
 

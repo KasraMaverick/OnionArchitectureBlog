@@ -1,9 +1,7 @@
 ﻿using _0_Framework.Log;
-using Blog.Management.Domain.ArticleAgg;
 using Blog.Management.Domain.CommentAgg;
 using Blog.Management.Infrastructure.EfCore.Repositories.Shared;
 using Microsoft.EntityFrameworkCore;
-using System.ComponentModel.Design;
 
 namespace Blog.Management.Infrastructure.EfCore.Repositories
 {
@@ -80,6 +78,11 @@ namespace Blog.Management.Infrastructure.EfCore.Repositories
                 _logService.LogException(ex, className, "exception error in deactivation");
                 return false;
             }
+        }
+
+        public Task<List<Comment>> GetAll(long articleId)
+        {
+            throw new NotImplementedException();
         }
     }
 }
