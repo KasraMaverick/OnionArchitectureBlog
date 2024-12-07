@@ -36,7 +36,7 @@ namespace Blog.Management.Application
 
                 if (commentList == null)
                 {
-                    _logService.LogWarning(@$"{className}/GetAll", "getall results were null"); //-- LOG (WAR) --
+                    _logService.LogWarning(@$"{className}/ActivateForArticle/GetAll", "getall results were null"); //-- LOG (WAR) --
                     return operation.Failed();
                 }
 
@@ -70,9 +70,43 @@ namespace Blog.Management.Application
             throw new NotImplementedException();
         }
 
-        public Task<OperationResult> DeactivateForArticle(long articleId)
+        public async Task<OperationResult> DeactivateForArticle(long articleId)
         {
-            
+            var operation = new OperationResult();
+            try
+            {
+                if (articleId == 0)
+                {
+                    _logService.LogError(@$"{className}/Deactivate", "articleId is zero"); //-- LOG (ERR) --
+                    return operation.Failed();
+                }
+
+                var commentList = await _commentRepository.GetAll(articleId);
+
+                if (commentList == null)
+                {
+                    _logService.LogWarning(@$"{className}/DeeactivateForArticle/GetAll", "getall results were null"); //-- LOG (WAR) --
+                    return operation.Failed();
+                }
+
+                foreach (var comment in commentList)
+                {
+                    var res = await _commentRepository.Deactivate(comment.ArticleId);
+                    if (!res)
+                    {
+                        _logService.LogError(@$"{className}/Dectivate", "deativate result was false"); //-- LOG (ERR) --
+                        return operation.Failed();
+                    }
+                }
+
+                _logService.LogInformation($@"{className}/Deactivate", "deactivate results were true and successful"); //-- LOG (INF) --
+                return operation.Succeeded();
+            }
+            catch (Exception ex)
+            {
+                _logService.LogException(ex, className, "exception error in deactivate"); //-- LOG (EXC) --
+                throw;
+            }
         }
 
         public Task<OperationResultWithData<List<GetCommentForArticleDto>>> GetAll(long articleId)
