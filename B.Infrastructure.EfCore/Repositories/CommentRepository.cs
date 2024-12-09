@@ -1,4 +1,5 @@
 ﻿using _0_Framework.Log;
+using Blog.Management.Domain.AuthorAgg;
 using Blog.Management.Domain.CommentAgg;
 using Blog.Management.Infrastructure.EfCore.Repositories.Shared;
 using Microsoft.EntityFrameworkCore;
@@ -7,6 +8,9 @@ namespace Blog.Management.Infrastructure.EfCore.Repositories
 {
     public class CommentRepository : Repository<Comment>, ICommentRepository
     {
+
+        #region INJECTION
+
         private readonly BlogContext _dbContext;
         private readonly ILogService _logService;
         const string className = nameof(CommentRepository);
@@ -15,6 +19,25 @@ namespace Blog.Management.Infrastructure.EfCore.Repositories
             _dbContext = dbContext;
             _logService = logService;
         }
+
+        #endregion
+
+
+        #region CRUD
+
+        public async Task<List<Comment>> GetAllForArticle(long articleId)
+        {
+            return await _dbContext.Comments.Where(x => x.ArticleId == articleId).ToListAsync();
+        }
+        public async Task<List<Comment>> GetAllForAuthor(long authorId)
+        {
+            return await _dbContext.Comments.Where(x => x.AuthorId == authorId).ToListAsync();
+        }
+
+        #endregion
+
+
+        #region ACTIVATE/DEACTIVATE
 
         public async Task<bool> Activate(long commentId)
         {
@@ -80,13 +103,6 @@ namespace Blog.Management.Infrastructure.EfCore.Repositories
             }
         }
 
-        public Task<List<Comment>> GetAllForArticle(long articleId)
-        {
-            throw new NotImplementedException();
-        }
-        public Task<List<Comment>> GetAllForAuthor(long authorId)
-        {
-            throw new NotImplementedException();
-        }
+        #endregion
     }
 }
