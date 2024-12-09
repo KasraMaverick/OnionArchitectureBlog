@@ -10,6 +10,8 @@ namespace Blog.Management.Application.Contracts.Comment
         Task<OperationResult> Update(EditCommentDto comment);
         Task<OperationResult> ActivateForArticle(long articleId);
         Task<OperationResult> DeactivateForArticle(long articleId);
+        Task<OperationResult> ActivateForAuthor(long authorId);
+        Task<OperationResult> DeactivateForAuthor(long authorId);
         
     }
 }

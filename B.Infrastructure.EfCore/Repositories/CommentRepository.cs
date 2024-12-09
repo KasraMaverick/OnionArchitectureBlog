@@ -80,7 +80,11 @@ namespace Blog.Management.Infrastructure.EfCore.Repositories
             }
         }
 
-        public Task<List<Comment>> GetAll(long articleId)
+        public Task<List<Comment>> GetAllForArticle(long articleId)
+        {
+            throw new NotImplementedException();
+        }
+        public Task<List<Comment>> GetAllForAuthor(long authorId)
         {
             throw new NotImplementedException();
         }
