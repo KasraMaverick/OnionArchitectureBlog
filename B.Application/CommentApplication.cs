@@ -2,6 +2,7 @@
 using _0_Framework.Log;
 using Blog.Management.Application.Contracts.Comment;
 using Blog.Management.Application.Contracts.Comment.Dtos;
+using Blog.Management.Domain.ArticleAgg;
 using Blog.Management.Domain.CommentAgg;
 
 namespace Blog.Management.Application
@@ -26,9 +27,27 @@ namespace Blog.Management.Application
 
         #region CRUD
 
-        public Task<OperationResult> Create(CreateCommentDto comment)
+        public async Task<OperationResult> Create(CreateCommentDto comment)
         {
-            throw new NotImplementedException();
+            var operation = new OperationResult();
+            try
+            {
+                var commentDto = new Comment(comment.Text, comment.authorId, comment.articleId);
+                var res = await _commentRepository.Create(commentDto);
+                if (res == null)
+                {
+                    _logService.LogError(@$"{className}/Create", "create results were null"); //-- LOG (ERR) --
+                    return operation.Failed();
+                }
+
+                _logService.LogInformation($@"{className}/Create", "create results were successful"); //-- LOG (INF) --
+                return operation.Succeeded(res);
+            }
+            catch (Exception ex)
+            {
+                _logService.LogException(ex, className, "exception error in create"); //-- LOG (EXC) --
+                throw;
+            }
         }
 
 

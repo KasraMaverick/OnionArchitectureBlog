@@ -46,12 +46,13 @@ namespace Blog.Management.Domain.CommentAgg
             CommentText = commentText;
             LastUpdatedDate = DateTime.Now;
         }
+
         public void Like()
         {
             LikesCount ++;
         }
 
-        public void DisLike()
+        public void Dislike()
         {
             DislikesCount --;
         }

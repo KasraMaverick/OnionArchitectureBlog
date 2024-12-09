@@ -1,4 +1,5 @@
 ﻿using _0_Framework.Log;
+using Blog.Management.Domain.ArticleAgg;
 using Blog.Management.Domain.AuthorAgg;
 using Blog.Management.Domain.CommentAgg;
 using Blog.Management.Infrastructure.EfCore.Repositories.Shared;
@@ -99,6 +100,59 @@ namespace Blog.Management.Infrastructure.EfCore.Repositories
             catch (Exception ex)
             {
                 _logService.LogException(ex, className, "exception error in deactivation");
+                return false;
+            }
+        }
+
+        #endregion
+
+
+        #region LIKE/DISLIKE
+
+        public async Task<bool> Like(long commentId)
+        {
+            try
+            {
+                Comment? val = await _dbContext.FindAsync<Comment>(new object[1] { commentId });
+
+                if (commentId == 0 || val == null)
+                {
+                    return false;
+                }
+
+                _dbContext.Entry(val).State = EntityState.Detached;
+                val.Like();
+                _dbContext.Entry(val).State = EntityState.Modified;
+
+                await SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public async Task<bool> Dislike(long commentId)
+        {
+            try
+            {
+                Comment? val = await _dbContext.FindAsync<Comment>(new object[1] { commentId });
+
+                if (commentId == 0 || val == null)
+                {
+                    return false;
+                }
+
+                _dbContext.Entry(val).State = EntityState.Detached;
+                val.Dislike();
+                _dbContext.Entry(val).State = EntityState.Modified;
+
+                await SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
                 return false;
             }
         }

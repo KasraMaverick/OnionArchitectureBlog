@@ -9,5 +9,8 @@ namespace Blog.Management.Domain.CommentAgg
 
         Task<bool> Activate(long commentId);
         Task<bool> Deactivate(long commentId);
+
+        Task<bool> Like(long commentId);
+        Task<bool> DisLike(long commentId);
     }
 }
