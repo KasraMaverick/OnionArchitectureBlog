@@ -249,5 +249,55 @@ namespace Blog.Management.Application
 
         #endregion
 
+        #region LIKE/DISLIKE
+
+        public async Task<OperationResult> LikeComment(long commentId)
+        {
+            var operation = new OperationResult();
+            try
+            {
+                var res = await _commentRepository.Like(commentId);
+
+                if (res)
+                {
+                    _logService.LogInformation($@"{className}/Like", "like results were true"); //-- LOG (INF) --
+                    return operation.Succeeded(res);
+                }
+
+                _logService.LogError(@$"{className}/Like", "like results were false"); //-- LOG (ERR) --
+                return operation.Failed();
+            }
+            catch (Exception ex)
+            {
+                _logService.LogException(ex, className, "exception error in like"); //-- LOG (EXC) --
+                throw;
+            }
+        }
+
+        public async Task<OperationResult> DislikeComment(long commentId)
+        {
+            var operation = new OperationResult();
+            try
+            {
+                var res = await _commentRepository.Dislike(commentId);
+
+                if (res)
+                {
+                    _logService.LogInformation($@"{className}/Dislike", "dislike results were true"); //-- LOG (INF) --
+                    return operation.Succeeded(res);
+                }
+
+                _logService.LogError(@$"{className}/Dislike", "dislike results were false"); //-- LOG (ERR) --
+                return operation.Failed();
+            }
+            catch (Exception ex)
+            {
+                _logService.LogException(ex, className, "exception error in dislike"); //-- LOG (EXC) --
+                throw;
+            }
+        }
+
+        #endregion
+
     }
 }
