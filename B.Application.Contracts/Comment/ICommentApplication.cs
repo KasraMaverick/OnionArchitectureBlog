@@ -12,6 +12,8 @@ namespace Blog.Management.Application.Contracts.Comment
         Task<OperationResult> DeactivateForArticle(long articleId);
         Task<OperationResult> ActivateForAuthor(long authorId);
         Task<OperationResult> DeactivateForAuthor(long authorId);
+        Task<OperationResult> LikeComment(long  commentId);
+        Task<OperationResult> DislikeComment(long commentId);
         
     }
 }

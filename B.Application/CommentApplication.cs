@@ -32,7 +32,7 @@ namespace Blog.Management.Application
             var operation = new OperationResult();
             try
             {
-                var commentDto = new Comment(comment.Text, comment.authorId, comment.articleId);
+                var commentDto = new Comment(comment.CommentText, comment.authorId, comment.articleId);
                 var res = await _commentRepository.Create(commentDto);
                 if (res == null)
                 {
@@ -56,9 +56,30 @@ namespace Blog.Management.Application
             throw new NotImplementedException();
         }
 
-        public Task<OperationResult> Update(EditCommentDto comment)
+        public async Task<OperationResult> Update(EditCommentDto commentDto)
         {
-            throw new NotImplementedException();
+            var operation = new OperationResult();
+
+            try
+            {
+                Comment comment = await _commentRepository.GetById(commentDto.CommentId);
+                comment.Edit(commentDto.CommentText);
+                var res = await _commentRepository.Edit(comment, commentDto.CommentId);
+
+                if (res == null)
+                {
+                    _logService.LogError(@$"{className}/Update", "update results were null"); //-- LOG (ERR) --
+                    return operation.Failed();
+                }
+
+                _logService.LogInformation($@"{className}/Update", "update results were successful"); //-- LOG (ERR) --
+                return operation.Succeeded(res);
+            }
+            catch (Exception ex)
+            {
+                _logService.LogException(ex, className, "exception error in update"); //-- LOG (EXC) --
+                throw;
+            }
         }
 
         #endregion
