@@ -5,9 +5,12 @@ namespace Blog.Provider.Contracts.Comment
 {
     public interface ICommentRequestProvider
     {
-        public Task<OperationResultWithData<List<GetCommentForArticleDto>>> GetAll();
-        public Task<OperationResult> Create(CreateCommentDto comment);
-        public Task<OperationResult> Update(EditCommentDto comment);
-        public Task<OperationResult> Delete(DeleteCommentDto comment);
+        Task<OperationResultWithData<List<GetCommentForArticleDto>>> GetAll();
+        Task<OperationResult> Create(CreateCommentDto comment);
+        Task<OperationResult> Update(EditCommentDto comment);
+        Task<OperationResult> Delete(DeleteCommentDto comment);
+        Task<OperationResult> LikeComment(long commentId);
+        Task<OperationResult> DislikeComment(long commentId);
+
     }
 }

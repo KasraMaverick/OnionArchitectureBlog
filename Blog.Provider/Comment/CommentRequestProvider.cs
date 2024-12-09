@@ -13,9 +13,9 @@ namespace Blog.Provider.Comment
             _commentApplication = commentApplication;  
         }
 
-        public Task<OperationResult> Create(CreateCommentDto comment)
+        public async Task<OperationResult> Create(CreateCommentDto comment)
         {
-            throw new NotImplementedException();
+            return await _commentApplication.Create(comment);
         }
 
         public Task<OperationResult> Delete(DeleteCommentDto comment)
@@ -28,9 +28,19 @@ namespace Blog.Provider.Comment
             throw new NotImplementedException();
         }
 
-        public Task<OperationResult> Update(EditCommentDto comment)
+        public async Task<OperationResult> Update(EditCommentDto comment)
         {
-            throw new NotImplementedException();
+            return await _commentApplication.Update(comment);
+        }
+
+        public async Task<OperationResult> LikeComment(long commentId)
+        {
+            return await _commentApplication.LikeComment(commentId);
+        }
+
+        public async  Task<OperationResult> DislikeComment(long commentId)
+        {
+            return await _commentApplication.DislikeComment(commentId);
         }
     }
 }
