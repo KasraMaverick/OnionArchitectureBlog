@@ -36,13 +36,6 @@ namespace Blog.Presentation.WebAPI.Controllers
             return res;
         }
 
-        [HttpDelete("Delete")]
-        public async Task<OperationResult> Delete(DeleteArticleDto dto)
-        {
-            var res = await _articleRequestProvider.Delete(dto);
-            return res;
-        }
-
         [HttpPut("Update")]
         public async Task<OperationResult> Edit(UpdateArticleDto dto)
         {

@@ -3,24 +3,29 @@ using Blog.Management.Application.Contracts.Article;
 using Blog.Management.Application.Contracts.Article.Dtos;
 using Blog.Management.Application.Contracts.ArticleCategory;
 using Blog.Management.Application.Contracts.Author;
+using Blog.Management.Application.Contracts.Comment;
 using Blog.Provider.Contracts.Article;
 
 namespace Blog.Provider.Article
 {
     public class ArticleRequestProvider : IArticleRequestProvider
     {
+
         #region INJECTION
 
         private readonly IArticleApplication _articleApplication;
         private readonly IArticleCategoryApplication _articleCategoryApplication;
         private readonly IAuthorApplication _authorApplication;
+        private readonly ICommentApplication _commentApplication;
         public ArticleRequestProvider(IArticleApplication articleApplication,
                                       IArticleCategoryApplication articleCategoryApplication,
-                                      IAuthorApplication authorApplication)
+                                      IAuthorApplication authorApplication,
+                                      ICommentApplication commentApplication)
         {
             _articleApplication = articleApplication;
             _articleCategoryApplication = articleCategoryApplication;
             _authorApplication = authorApplication;
+            _commentApplication = commentApplication;
         }
 
         #endregion
@@ -34,11 +39,6 @@ namespace Blog.Provider.Article
             await _authorApplication.AddArticleCount(article.AuthorId);
 
             return await _articleApplication.Create(article);
-        }
-
-        public Task<OperationResult> Delete(DeleteArticleDto article)
-        {
-            throw new NotImplementedException();
         }
 
         public async Task<OperationResultWithData<List<GetArticleDto>>> GetAll(long authorId)
@@ -70,9 +70,28 @@ namespace Blog.Provider.Article
         }
         public async Task<OperationResult> Archive(long articleId)
         {
-            return await _articleApplication.Archive(articleId);
+            var operation = new OperationResult();
+            try
+            {
+                //---------- DEACTIVATE COMMENTS FIRST ----------\\
+                var commentDeactivationResult = await _commentApplication.DeactivateForArticle(articleId);
+                if (commentDeactivationResult.IsSucceeded == false)
+                {
+                    return operation.Failed();
+                }
+
+
+                var res = await _articleApplication.Archive(articleId);
+                return operation.Succeeded(res);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
         }
 
         #endregion
+
     }
 }
